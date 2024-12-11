@@ -1,24 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Serveur.Utilities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Serveur.Entities
 {
     /// <summary>
-    /// Modele Carte bancaire
+    /// Entite Carte bancaire
     /// </summary>
-    internal class CarteBancaire
+    public class CarteBancaire
     {
-        private readonly string numCartePrefixe = "4974 0185 0223 ";
+        // prefixe d'un numéro de carte
+        private const string numCartePrefixe = "4974 0185 0223 ";
 
-        [Required]
+        private int numCarteSuffixe;
+
+        [Key]
         public int Id { get; set; }
 
         [NotMapped]
-        [Required]
         [Range(0, 9999)]
-        public int NumCarteSuffixe { get; set; }
+        public int NumCarteSuffixe
+        {
+            get => numCarteSuffixe;
+            set
+            {
+                numCarteSuffixe = Tool.RandomInt(9999);
+            }
+        }
 
+        [Required]
         [StringLength(19)]
         public string NumCarte { get => numCartePrefixe + $"{NumCarteSuffixe:D4}"; }
 

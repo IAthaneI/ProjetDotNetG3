@@ -9,24 +9,18 @@ namespace ApplicationConsole.Model
     /// Modele Carte bancaire
     /// </summary>
     [JsonSerializable(typeof(CarteBancaireModel))]
-    internal class CarteBancaireModel
+    public class CarteBancaireModel
     {
-        private readonly string numCartePrefixe = "4974 0185 0223 ";
-
         [JsonPropertyName("id")]
         [XmlElement(Order = 1)]
         [Required]
         public int Id { get; set; }
 
-        //[NotMapped]
-        [Required]
-        [Range(0, 9999)]
-        public int NumCarteSuffixe { get; set; }
-
         [JsonPropertyName("numCarte")]
         [XmlAttribute("numCarte")]
         [StringLength(19)]
-        public string NumCarte { get => numCartePrefixe + $"{NumCarteSuffixe:D4}"; }
+        [Required]
+        public string NumCarte { get; }
 
         [Required]
         public DateOnly DateExpiration { get; set; }
