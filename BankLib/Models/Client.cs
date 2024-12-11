@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationConsole.Model
+namespace BankLib.Model
 {
-    internal abstract class Client
+    public abstract class Client
     {
         private int identifiant;
         private string? nom;

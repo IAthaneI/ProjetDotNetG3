@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationConsole.Model
+namespace BankLib.Model
 {
-    internal enum StatutJuridique
+    public enum StatutJuridique
     {
         SA,
         SAS,

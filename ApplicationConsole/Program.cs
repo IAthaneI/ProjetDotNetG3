@@ -1,7 +1,6 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
-using ApplicationConsole.Model;
-using Microsoft.IdentityModel.Logging;
+using BankLib.Model;
 
 internal class Program
 {

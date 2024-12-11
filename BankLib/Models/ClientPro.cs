@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationConsole.Model
+namespace BankLib.Model
 {
-    internal class ClientPro : Client
+    public class ClientPro : Client
     {
         private int ident;
         private string? siret;

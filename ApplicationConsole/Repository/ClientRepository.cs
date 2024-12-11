@@ -1,5 +1,5 @@
 ﻿using System.Data.Common;
-using ApplicationConsole.Model;
+using BankLib.Model;
 using ApplicationConsole.Utilities;
 
 namespace ApplicationConsole.Repository

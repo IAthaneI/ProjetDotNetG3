@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationConsole.Model
+namespace BankLib.Model
 {
-    internal class ClientPart : Client
+    public class ClientPart : Client
     {
         private int ident;
         private DateTime dateNaissance;
