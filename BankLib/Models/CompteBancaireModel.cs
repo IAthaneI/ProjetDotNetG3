@@ -1,7 +1,6 @@
-﻿using ApplicationConsole.Utilities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApplicationConsole.Model
+namespace BankLib.Models
 {
     /// <summary>
     /// Modele de compte bancaire

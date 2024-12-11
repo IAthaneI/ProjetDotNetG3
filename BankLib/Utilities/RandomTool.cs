@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Serveur.Utilities
+﻿namespace BankLib.Utilities
 {
     /// <summary>
     /// classe Outils
     /// </summary>
-    internal class Tool
+    internal class RandomTool
     {
         private static Random random = new Random();
 

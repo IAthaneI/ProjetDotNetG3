@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
-namespace ApplicationConsole.Model
+namespace BankLib.Models
 {
     /// <summary>
     /// Modele Carte bancaire

@@ -1,8 +1,8 @@
-﻿using Serveur.Utilities;
+﻿using BankLib.Utilities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Serveur.Entities
+namespace BankLib.Entities
 {
     /// <summary>
     /// Entite Carte bancaire
@@ -24,7 +24,7 @@ namespace Serveur.Entities
             get => numCarteSuffixe;
             set
             {
-                numCarteSuffixe = Tool.RandomInt(9999);
+                numCarteSuffixe = RandomTool.RandomInt(9999);
             }
         }
 

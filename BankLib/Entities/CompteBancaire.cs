@@ -1,7 +1,7 @@
-﻿using Serveur.Utilities;
+﻿using BankLib.Utilities;
 using System.ComponentModel.DataAnnotations;
 
-namespace Serveur.Entities
+namespace BankLib.Entities
 {
     /// <summary>
     /// Entite compte bancaire
@@ -22,7 +22,7 @@ namespace Serveur.Entities
             get => numCompte;
             private set
             {
-                numCompte = Tool.RandomString(tailleNumCompte);
+                numCompte = RandomTool.RandomString(tailleNumCompte);
             }
         }
 
