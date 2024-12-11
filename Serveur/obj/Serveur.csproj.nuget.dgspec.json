@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Athane\\source\\repos\\ApplicationConsole\\Serveur\\Serveur.csproj": {}
+    "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\Serveur\\Serveur.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Athane\\source\\repos\\ApplicationConsole\\Serveur\\Serveur.csproj": {
+    "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\Serveur\\Serveur.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Athane\\source\\repos\\ApplicationConsole\\Serveur\\Serveur.csproj",
+        "projectUniqueName": "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\Serveur\\Serveur.csproj",
         "projectName": "Serveur",
-        "projectPath": "C:\\Users\\Athane\\source\\repos\\ApplicationConsole\\Serveur\\Serveur.csproj",
+        "projectPath": "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\Serveur\\Serveur.csproj",
         "packagesPath": "C:\\Users\\Athane\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Athane\\source\\repos\\ApplicationConsole\\Serveur\\obj\\",
+        "outputPath": "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\Serveur\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
