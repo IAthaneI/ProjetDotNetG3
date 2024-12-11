@@ -35,7 +35,13 @@ namespace BankLib.Entities
         [Required]
         public DateOnly DateExpiration { get; set; }
 
+        [Required]
         [StringLength(30, MinimumLength = 2)]
         public string? NomTitulaire { get; set; }
+
+        [Required]
+        public int CompteBancaireId { get; set; }
+
+        public CompteBancaire CompteBancaire { get; set; }
     }
 }

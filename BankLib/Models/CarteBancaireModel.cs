@@ -24,6 +24,7 @@ namespace BankLib.Models
         [Required]
         public DateOnly DateExpiration { get; set; }
 
+        [Required]
         [StringLength(30, MinimumLength = 2)]
         public string? NomTitulaire { get; set; }
     }
