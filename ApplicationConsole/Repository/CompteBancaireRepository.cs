@@ -160,6 +160,56 @@ namespace ApplicationConsole.Repository
             return res > 0;
         }
 
+        public bool CheckNegativeOperation(int idCarteBancaire, int Montant)
+        {
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = "SELECT co.Solde as Solde FROM CompteBancaire co JOIN CarteBancaire ca ON co.Id = ca.CompteBancaireId WHERE ca.Id = @Id";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+                DBUtilities.AddParameter(command, "Id", idCarteBancaire, "ca.Id");
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    return Double.Parse(reader["Solde"].ToString()) > Montant;
+                }
+
+                connection.Close();
+            }
+            return false;
+        }
+
+        public bool UpdateSoldeCompteBancaire(CompteBancaire compteBancaire)
+        {
+            int res = 0;
+            if (connection != null)
+            {
+                string query = "UPDATE CompteBancaire SET Solde = @NewSolde WHERE Id = @Id";
+                try
+                {
+                    connection.Open();
+                    DbCommand command = connection.CreateCommand();
+                    command.CommandText = query;
+                    DBUtilities.AddParameter(command, "NewSolde", compteBancaire.Solde, "Solde");
+                    DBUtilities.AddParameter(command, "Id", compteBancaire.Id, "Id");
+                    res = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return res > 0;
+        }
+
         /// <summary>
         /// Affecte un numéro de compte unique
         /// La fonction GetCompteBancaire s'execute jusqu'au Timeout de 30 secondes au maximum

@@ -10,8 +10,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        //bool logged = false;
-        bool logged = true;
+        bool logged = false;
         Console.WriteLine("[| Bienvenue sur l'application console |]");
         while (!logged)
         {
@@ -22,7 +21,7 @@ internal class Program
             switch (key.Key)
             {
                 case ConsoleKey.NumPad1:
-                    Console.WriteLine("- Quel est votre nom d'utilisateur ?");
+                    Console.WriteLine("\n- Quel est votre nom d'utilisateur ?");
                     string? loginR = Console.ReadLine();
                     Console.WriteLine("- Quel est votre mot de passe ?");
                     string? passwordR = Console.ReadLine();
@@ -37,7 +36,7 @@ internal class Program
 
                     break;
                 case ConsoleKey.NumPad2:
-                    Console.WriteLine("- Quel est votre nom d'utilisateur ?");
+                    Console.WriteLine("\n- Quel est votre nom d'utilisateur ?");
                     string? loginL = Console.ReadLine();
                     Console.WriteLine("- Quel est votre mot de passe ?");
                     string? passwordL = Console.ReadLine();
@@ -54,10 +53,60 @@ internal class Program
                     break;
             }
         }
+        bool end = false;
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        ClientTests();
-        //CompteBancaireTests();
-        EnregistrementTests();
+        while (!end) 
+        {
+            Console.WriteLine("- Que souhaitais vous faires ?");
+            Console.WriteLine("1) Lister les clients");
+            Console.WriteLine("2) Lister les comptes");
+            Console.WriteLine("3) Lister les operations");
+            Console.WriteLine("4) Lister les operations d'un client");
+            Console.WriteLine("5) Voir les details d'un client");
+            Console.WriteLine("6) Saisir un client");
+            Console.WriteLine("7) Saisir un compte");
+            Console.WriteLine("8) Saisir une carte bancaire");
+            Console.WriteLine("9) Saisir une operation");
+            Console.WriteLine("Q) Quitter");
+            var key = Console.ReadKey();
+            switch (key.Key)
+            {
+                case ConsoleKey.NumPad1:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad2:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad3:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad4:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad5:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad6:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad7:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad8:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad9:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.Q:
+                    Console.WriteLine("\nAu revoir !");
+                    Console.WriteLine("[| Vous avez été déconnecté |]");
+                    end = true;
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 
