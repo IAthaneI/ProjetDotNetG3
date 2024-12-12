@@ -1,36 +1,36 @@
 ﻿using ApplicationConsole.Utilities;
-using BankLib;
 using BankLib.Entities;
 using BankLib.Models;
 using BankLib.Utilities;
-using System.Data;
 using System.Data.Common;
+using System.Data;
+using BankLib;
 
 namespace ApplicationConsole.Repository
 {
     /// <summary>
-    /// Classe d'accès en BDD pour Compte Bancaire
+    /// Classe d'accès en BDD pour Carte Bancaire
     /// </summary>
-    public class CompteBancaireRepository
+    public class CarteBancaireRepository
     {
         private DbConnection? connection;
-        public CompteBancaireRepository()
+        public CarteBancaireRepository()
         {
             connection = DBUtilities.GetConnection();
         }
 
         /// <summary>
-        /// Récupere tous les comptes en BDD
+        /// Récupere tous les cartes en BDD
         /// </summary>
-        /// <returns>Liste de compte bancaires</returns>
-        public List<CompteBancaireModel> GetCompteBancaires()
+        /// <returns>Liste de carte bancaires</returns>
+        public List<CarteBancaireModel> GetCarteBancaires()
         {
-            List<CompteBancaireModel> cModels = new List<CompteBancaireModel>();
+            List<CarteBancaireModel> cModels = new List<CarteBancaireModel>();
             if (connection != null)
             {
                 DataTable table = new DataTable();
                 // TODO : préciser les champs au lieu de *
-                string query = "SELECT * FROM CompteBancaire";
+                string query = "SELECT * FROM CarteBancaire";
                 try
                 {
                     connection.Open();
@@ -47,7 +47,7 @@ namespace ApplicationConsole.Repository
                 {
                     connection.Close();
                 }
-                return DataConvert.ToCompteBancaireModel(table);
+                return DataConvert.ToCarteBancaireModel(table);
             }
             return cModels;
         }
@@ -55,15 +55,15 @@ namespace ApplicationConsole.Repository
         /// <summary>
         /// Récupère un compte en DBB
         /// </summary>
-        /// <param name="id">id du CompteBancaire recherché</param>
-        /// <returns>CompteBancaireModel</returns>
-        public CompteBancaireModel GetCompteBancaire(int id)
+        /// <param name="id">id du CarteBancaire recherché</param>
+        /// <returns>CarteBancaireModel</returns>
+        public CarteBancaireModel GetCarteBancaire(int id)
         {
-            CompteBancaireModel cModel = new CompteBancaireModel();
+            CarteBancaireModel cModel = new CarteBancaireModel();
             if (connection != null)
             {
                 DataTable table = new DataTable();
-                string query = "SELECT * FROM CompteBancaire where Id = @pId";
+                string query = "SELECT * FROM CarteBancaire where Id = @pId";
                 try
                 {
                     connection.Open();
@@ -81,29 +81,29 @@ namespace ApplicationConsole.Repository
                 {
                     connection.Close();
                 }
-                return DataConvert.ToCompteBancaireModel(table).FirstOrDefault();
+                return DataConvert.ToCarteBancaireModel(table).FirstOrDefault();
             }
             return cModel;
         }
 
         /// <summary>
-        ///  Récupère un compte en DBB dont le numero de compte est passé en parametre
+        ///  Récupère une carte en DBB dont le numeroSuffixe est passé en parametre
         /// </summary>
-        /// <param name="numCompte"></param>
+        /// <param name="numCarte"></param>
         /// <returns></returns>
-        public CompteBancaireModel GetCompteBancaire(string numCompte)
+        public CarteBancaireModel GetCarteBancaire(string numCarte)
         {
-            CompteBancaireModel cModel = new CompteBancaireModel();
+            CarteBancaireModel cModel = new CarteBancaireModel();
             if (connection != null)
             {
                 DataTable table = new DataTable();
-                string query = "SELECT * FROM CompteBancaire where NumCompte = @pNumCompte";
+                string query = "SELECT * FROM CarteBancaire where NumCarte = @pNumCarte";
                 try
                 {
                     connection.Open();
                     DbCommand command = connection.CreateCommand();
                     command.CommandText = query;
-                    DBUtilities.AddParameter(command, "pNumCompte", numCompte, "NumCompte");
+                    DBUtilities.AddParameter(command, "pNumCarte", numCarte, "NumCarte");
                     DbDataReader dbDataReader = command.ExecuteReader();
                     table.Load(dbDataReader);
                 }
@@ -115,39 +115,40 @@ namespace ApplicationConsole.Repository
                 {
                     connection.Close();
                 }
-                return DataConvert.ToCompteBancaireModel(table).FirstOrDefault();
+                return DataConvert.ToCarteBancaireModel(table).FirstOrDefault();
             }
             return cModel;
         }
 
         /// <summary>
-        /// Ajoute un compte bancaire en BDD
+        /// Ajoute une carte bancaire en BDD
         /// </summary>
-        /// <param name="compteBancaire"></param>
+        /// <param name="carteBancaire"></param>
         /// <returns>True si l'ajout s'est bien passé sinon False</returns>
-        public bool InsertCompteBancaire(CompteBancaireModel compteBancaire)
+        public bool InsertCarteBancaire(CarteBancaireModel carteBancaire)
         {
             int res = 0;
             if (connection != null)
             {
-                if(compteBancaire == null)
+                if (carteBancaire == null)
                     Console.WriteLine("Valeurs incorrectes");
                 else
-                    compteBancaire.NumCompte = SetUniqueNumCompte();
-                if(string.IsNullOrWhiteSpace(compteBancaire.NumCompte))
+                    carteBancaire.NumCarte = SetUniqueNumCarte();
+                if (string.IsNullOrWhiteSpace(carteBancaire.NumCarte))
                 {
-                    Console.WriteLine("Echec d'affectation de numéro de compte unique");
+                    Console.WriteLine("Echec d'affectation de numéro de carte unique");
                     return false;
-                }    
-                string query = "INSERT INTO CompteBancaire Values (@pNumCompte, @pDateOuverture, @pSolde)";
+                }
+                string query = "INSERT INTO CarteBancaire Values (@pNumCarte, @pDateExpiration, @pNomTitulaire, @pCompteBancaireId)";
                 try
                 {
                     connection.Open();
                     DbCommand command = connection.CreateCommand();
                     command.CommandText = query;
-                    DBUtilities.AddParameter(command, "pNumCompte", compteBancaire.NumCompte, "NumCompte");
-                    DBUtilities.AddParameter(command, "pDateOuverture", compteBancaire.DateOuverture, "DateOuverture");
-                    DBUtilities.AddParameter(command, "pSolde", compteBancaire.Solde, "Solde");
+                    DBUtilities.AddParameter(command, "pNumCarte", carteBancaire.NumCarte, "NumCarte");
+                    DBUtilities.AddParameter(command, "pDateExpiration", carteBancaire.DateExpiration, "DateExpiration");
+                    DBUtilities.AddParameter(command, "pNomTitulaire", carteBancaire.NomTitulaire, "NomTitulaire");
+                    DBUtilities.AddParameter(command, "pCompteBancaireId", carteBancaire.CompteBancaireId, "CompteBancaireId");
                     res = command.ExecuteNonQuery();
                 }
                 catch (Exception ex)
@@ -163,19 +164,21 @@ namespace ApplicationConsole.Repository
         }
 
         /// <summary>
-        /// Affecte un numéro de compte unique
-        /// La fonction GetCompteBancaire s'execute jusqu'au Timeout de 30 secondes au maximum
+        /// Affecte un numéro de carte unique
+        /// La fonction GetCarteBancaire s'execute jusqu'au Timeout de 30 secondes au maximum
         /// Elle s'arrete si elle retourne null => pas de correspondance
         /// </summary>
         /// <returns></returns>
-        private string SetUniqueNumCompte()
+        private string SetUniqueNumCarte()
         {
-            string res = RandomTool.RandomString(Constantes.COMPTE_BANCAIRE_NUM_LEN);
-            if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCompteBancaire(res) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
-                {
-                    return res;
-                }
+            int rand = RandomTool.RandomInt(Constantes.CARTE_BANCAIRE_NUM_MAX_VAL);
+            string numCarteLong = Constantes.CARTE_BANCAIRE_NUM_PREFIXE + rand;
+            if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCarteBancaire(numCarteLong) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
+            {
+                return new string($"{rand:D4}");
+            }
             return string.Empty;
         }
+
     }
 }

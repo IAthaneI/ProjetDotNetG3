@@ -64,6 +64,7 @@ internal class Program
 
         CompteBancaireTests();
 
+        CarteBancaireTests();
     }
 
     private static void CompteBancaireTests()
@@ -72,13 +73,28 @@ internal class Program
         List<CompteBancaireModel> cbmList = cbr.GetCompteBancaires();
         foreach (var c in cbmList)
         {
-            Console.WriteLine($"{c.NumCompte} ouvert au {c.DateOuverture}. Solde :\t{c.Solde}");
+            Console.WriteLine($"{c.NumCompte} ouvert au {c.DateOuverture}. Solde :\t{c.Solde} Eur");
         }
 
         CompteBancaireModel cbm = cbr.GetCompteBancaire(1);
-        Console.WriteLine($"{cbm.NumCompte} ouvert au {cbm.DateOuverture}. Solde :\t{cbm.Solde}");
+        Console.WriteLine($"{cbm.NumCompte} ouvert au {cbm.DateOuverture}. Solde :\t{cbm.Solde} Eur");
 
-        CompteBancaire cb= new CompteBancaire();
-        cbr.InsertCompteBancaire(cb);
+        Console.WriteLine("Insertion " + cbr.InsertCompteBancaire(new CompteBancaireModel()));
+    }
+
+    private static void CarteBancaireTests()
+    {
+        CarteBancaireRepository cbr = new CarteBancaireRepository();
+        List<CarteBancaireModel> cbmList = cbr.GetCarteBancaires();
+        foreach (var c in cbmList)
+        {
+            Console.WriteLine($"Carte {c.NumCarte} pour le compte {c.CompteBancaireId} de {c.NomTitulaire}, expire au {c.DateExpiration}");
+        }
+
+        CarteBancaireModel cbm = cbr.GetCarteBancaire(2);
+        if(cbm != null)
+            Console.WriteLine($"Carte {cbm.NumCarte} pour le compte {cbm.CompteBancaireId} de {cbm.NomTitulaire}, expire au {cbm.DateExpiration}");
+
+        Console.WriteLine("Insertion " + cbr.InsertCarteBancaire(new CarteBancaireModel() { NomTitulaire = "Hardman", CompteBancaireId = 1}));
     }
 }

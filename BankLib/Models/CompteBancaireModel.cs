@@ -9,19 +9,16 @@ namespace BankLib.Models
     {
         [Key]
         public int Id { get; set; }
-        
-        [Required]
-        [StringLength(10)]
-        public string NumCompte
-        {
-            get; set;
-        }
-        
-        [Required]
-        public DateTime DateOuverture { get; set; }
 
         [Required]
-        public double Solde { get; set; } = 1000;
+        [StringLength(Constantes.COMPTE_BANCAIRE_NUM_LEN)]
+        public string NumCompte { get; set; }
+
+        [Required]
+        public DateTime DateOuverture { get; set; } = DateTime.Today;
+
+        [Required]
+        public double Solde { get; set; } = Constantes.COMPTE_BANCAIRE_SOLDE_INITIAL;
 
         public List<CarteBancaireModel>? CarteBancaireList { get; set; }
     }

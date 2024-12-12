@@ -1,31 +1,31 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using System.Xml.Serialization;
 
 namespace BankLib.Models
 {
     /// <summary>
     /// Modele Carte bancaire
+    /// Sert de mappage avec la BDD
     /// </summary>
-    [JsonSerializable(typeof(CarteBancaireModel))]
     public class CarteBancaireModel
     {
-        [JsonPropertyName("id")]
-        [XmlElement(Order = 1)]
         [Required]
         public int Id { get; set; }
 
-        [JsonPropertyName("numCarte")]
-        [XmlAttribute("numCarte")]
-        [StringLength(19)]
         [Required]
-        public string NumCarte { get; }
+        [StringLength(Constantes.CARTE_BANCAIRE_NUM_LEN)]
+        [Range(0, Constantes.CARTE_BANCAIRE_NUM_MAX_VAL)]
+        public string NumCarte { get; set; }
 
         [Required]
-        public DateOnly DateExpiration { get; set; }
+        public DateTime DateExpiration { get; set; } = DateTime.Today.AddYears(Constantes.CARTE_BANCAIRE_NUM_VALIDITE);
 
         [Required]
-        [StringLength(30, MinimumLength = 2)]
-        public string? NomTitulaire { get; set; }
+        [StringLength(Constantes.CARTE_BANCAIRE_NOM_TITULAIRE_MAX_LEN, MinimumLength = 2)]
+        public string NomTitulaire { get; set; }
+
+        [Required]
+        public int CompteBancaireId { get; set; }
+
+        public CompteBancaireModel CompteBancaire { get; set; }
     }
 }

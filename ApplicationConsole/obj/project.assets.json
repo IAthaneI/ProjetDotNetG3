@@ -1516,6 +1516,16 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "BankLib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/BankLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankLib.dll": {}
+        }
       }
     }
   },
@@ -4478,10 +4488,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "BankLib/1.0.0": {
+      "type": "project",
+      "path": "../BankLib/BankLib.csproj",
+      "msbuildProject": "../BankLib/BankLib.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "BankLib >= 1.0.0",
       "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 9.0.0",
       "Microsoft.Data.SqlClient >= 5.2.2",
       "Microsoft.EntityFrameworkCore >= 9.0.0",
@@ -4522,7 +4538,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\BankLib.csproj": {
+              "projectPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\BankLib.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
