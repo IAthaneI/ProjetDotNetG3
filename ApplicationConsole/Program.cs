@@ -72,7 +72,11 @@ internal class Program
             Console.WriteLine("----------------------------------------");
             clients = clientRepo.getClients();
             clients.ForEach(client => Console.WriteLine(client.toString()));
-
+        }
+        catch (ClientException e)
+        {
+            Console.WriteLine($"Une erreur a été détecter : Code - {e.Code} {e.Mes}");
+        }
     }
 
     private static void CompteBancaireTests()

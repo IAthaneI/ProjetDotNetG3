@@ -3,35 +3,8 @@
   "WorkspaceRootPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\applicationconsole\\repository\\cartebancairerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|solutionrelative:applicationconsole\\repository\\cartebancairerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\applicationconsole\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|solutionrelative:applicationconsole\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\banklib\\models\\cartebancairemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|solutionrelative:banklib\\models\\cartebancairemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DESKTOP_6MDR1F9/DBProjet/True/SqlTable/dbo.CarteBancaire.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\applicationconsole\\utilities\\dataconvert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|solutionrelative:applicationconsole\\utilities\\dataconvert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\applicationconsole\\repository\\comptebancairerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|solutionrelative:applicationconsole\\repository\\comptebancairerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\banklib\\models\\comptebancairemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|solutionrelative:banklib\\models\\comptebancairemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\banklib\\entities\\comptebancaire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|solutionrelative:banklib\\entities\\comptebancaire.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,107 +14,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 213,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "dbo.CarteBancaire [Donn\u00E9es]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/DESKTOP_6MDR1F9/DBProjet/True/SqlTable/dbo.CarteBancaire.sql",
-              "ToolTip": "dbo.CarteBancaire [Donn\u00E9es]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-12T10:59:11.774Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CompteBancaireModel.cs",
-              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Models\\CompteBancaireModel.cs",
-              "RelativeDocumentMoniker": "BankLib\\Models\\CompteBancaireModel.cs",
-              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Models\\CompteBancaireModel.cs",
-              "RelativeToolTip": "BankLib\\Models\\CompteBancaireModel.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T10:26:26.015Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Program.cs",
               "RelativeDocumentMoniker": "ApplicationConsole\\Program.cs",
               "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Program.cs",
               "RelativeToolTip": "ApplicationConsole\\Program.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAADwv2EAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAIwEwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T10:06:28.975Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CarteBancaireRepository.cs",
-              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Repository\\CarteBancaireRepository.cs",
-              "RelativeDocumentMoniker": "ApplicationConsole\\Repository\\CarteBancaireRepository.cs",
-              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Repository\\CarteBancaireRepository.cs",
-              "RelativeToolTip": "ApplicationConsole\\Repository\\CarteBancaireRepository.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAADwv54AAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T07:38:06.512Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CompteBancaireRepository.cs",
-              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Repository\\CompteBancaireRepository.cs",
-              "RelativeDocumentMoniker": "ApplicationConsole\\Repository\\CompteBancaireRepository.cs",
-              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Repository\\CompteBancaireRepository.cs",
-              "RelativeToolTip": "ApplicationConsole\\Repository\\CompteBancaireRepository.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAADgv38AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T08:59:34.469Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CarteBancaireModel.cs",
-              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Models\\CarteBancaireModel.cs",
-              "RelativeDocumentMoniker": "BankLib\\Models\\CarteBancaireModel.cs",
-              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Models\\CarteBancaireModel.cs",
-              "RelativeToolTip": "BankLib\\Models\\CarteBancaireModel.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAADwvxMAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T07:55:31.534Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CompteBancaire.cs",
-              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Entities\\CompteBancaire.cs",
-              "RelativeDocumentMoniker": "BankLib\\Entities\\CompteBancaire.cs",
-              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Entities\\CompteBancaire.cs",
-              "RelativeToolTip": "BankLib\\Entities\\CompteBancaire.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T23:22:41.401Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DataConvert.cs",
-              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Utilities\\DataConvert.cs",
-              "RelativeDocumentMoniker": "ApplicationConsole\\Utilities\\DataConvert.cs",
-              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Utilities\\DataConvert.cs",
-              "RelativeToolTip": "ApplicationConsole\\Utilities\\DataConvert.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAADgvzUAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T22:01:24.553Z",
+              "WhenOpened": "2024-12-12T11:15:33.593Z",
               "EditorCaption": ""
             }
           ]

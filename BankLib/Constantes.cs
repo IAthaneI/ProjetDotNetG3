@@ -14,7 +14,7 @@
         #region Carte bancaire
         public const int    CARTE_BANCAIRE_NUM_MAX_VAL =                9999;
         public const int    CARTE_BANCAIRE_NUM_LEN =                    4;
-        public const string CARTE_BANCAIRE_NUM_PREFIXE =                "4974 0185 0223 ";
+        public const string CARTE_BANCAIRE_NUM_PREFIXE =                "497401850223";
         public const int    CARTE_BANCAIRE_NUM_VALIDITE =               2;
         public const int    CARTE_BANCAIRE_NOM_TITULAIRE_MAX_LEN =      30;
         #endregion

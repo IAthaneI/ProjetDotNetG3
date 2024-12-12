@@ -173,9 +173,12 @@ namespace ApplicationConsole.Repository
         {
             int rand = RandomTool.RandomInt(Constantes.CARTE_BANCAIRE_NUM_MAX_VAL);
             string numCarteLong = Constantes.CARTE_BANCAIRE_NUM_PREFIXE + rand;
-            if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCarteBancaire(numCarteLong) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
+            if (ValidationTool.AlgoLuhn(numCarteLong))
             {
-                return new string($"{rand:D4}");
+                if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCarteBancaire(numCarteLong) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
+                {
+                    return new string($"{rand:D4}");
+                }
             }
             return string.Empty;
         }
