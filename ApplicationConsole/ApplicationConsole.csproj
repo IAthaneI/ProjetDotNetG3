@@ -20,16 +20,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-<<<<<<< HEAD
 	  <Folder Include="Entities\" />
 	  <Folder Include="Model\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BankLib\BankLib.csproj" />
-=======
-		<ProjectReference Include="..\BankLib\BankLib.csproj" />
->>>>>>> 0d3890a20840c3924b7a61bdbb25e268e9ae7dc3
 	</ItemGroup>
 	
 </Project>

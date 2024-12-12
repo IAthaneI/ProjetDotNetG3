@@ -60,9 +60,6 @@ internal class Program
 
     }
 
-<<<<<<< HEAD
-        CarteBancaireTests();
-=======
     private static void ClientTests() 
     {
         try
@@ -76,12 +73,6 @@ internal class Program
             clients = clientRepo.getClients();
             clients.ForEach(client => Console.WriteLine(client.toString()));
 
-        }
-        catch (ClientException e)
-        {
-            Console.WriteLine($"Une erreur a été détecter : Code - {e.Code} {e.Mes}");
-        }
->>>>>>> 0d3890a20840c3924b7a61bdbb25e268e9ae7dc3
     }
 
     private static void CompteBancaireTests()
