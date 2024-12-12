@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BankLib.Exceptions;
 
 namespace BankLib.Model
 {
@@ -25,7 +26,12 @@ namespace BankLib.Model
 
         public int Ident { get => ident; set => ident = value; }
         public DateTime DateNaissance { get => dateNaissance; set => dateNaissance = value; }
-        public string? Prenom { get => prenom; set => prenom = value; }
+        public string? Prenom { get => prenom; set
+            {
+                if (value != null && value.Length > 50) throw new ClientException(2);
+                prenom = value;
+            }
+        }
         public Sexe Sexe { get => sexe; set => sexe = value; }
 
         public override String toString() 

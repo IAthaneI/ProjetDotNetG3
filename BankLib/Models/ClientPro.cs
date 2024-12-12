@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BankLib.Exceptions;
 
 namespace BankLib.Model
 {
@@ -24,7 +25,12 @@ namespace BankLib.Model
         }
 
         public int Ident { get => ident; set => ident = value; }
-        public string? Siret { get => siret; set => siret = value; }
+        public string? Siret { get => siret; set
+            {
+                if (value != null && value.Length != 14) throw new ClientException(3);
+                siret = value;
+            }
+        }
         public StatutJuridique StatutJuridique { get => statutJuridique; set => statutJuridique = value; }
         public Adresse Siege { get => siege; set => siege = value; }
 

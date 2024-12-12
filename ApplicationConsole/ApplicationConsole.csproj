@@ -18,5 +18,9 @@
 		</PackageReference>
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BankLib\BankLib.csproj" />
+	</ItemGroup>
 	
 </Project>
