@@ -11,13 +11,14 @@ namespace BankLib.Models
         public int Id { get; set; }
         
         [Required]
+        [StringLength(10)]
         public string NumCompte
         {
-            get;
+            get; set;
         }
         
         [Required]
-        public DateOnly DateOuverture { get; set; }
+        public DateTime DateOuverture { get; set; }
 
         [Required]
         public double Solde { get; set; } = 1000;

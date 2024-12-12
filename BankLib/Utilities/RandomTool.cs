@@ -3,7 +3,7 @@
     /// <summary>
     /// classe Outils
     /// </summary>
-    internal class RandomTool
+    public class RandomTool
     {
         private static Random random = new Random();
 
@@ -22,6 +22,25 @@
         {
             return random.Next(0, length);
         }
-       
+
+        /// <summary>
+        /// Execute la fonction task jusqu'a ce qu'elle retourne true ou temps écoulé
+        /// </summary>
+        /// <param name="task">Fonction a executer</param>
+        /// <param name="timeSpan">temps d'execution</param>
+        /// <returns>True/False</returns>
+        public static bool RetryUntilSuccessOrTimeout(Func<bool> task, TimeSpan timeSpan)
+        {
+            bool success = false;
+            int elapsed = 0;
+            while ((!success) && (elapsed < timeSpan.TotalMilliseconds))
+            {
+                Thread.Sleep(1000);
+                elapsed += 1000;
+                success = task();
+            }
+            return success;
+        }
+
     }
 }

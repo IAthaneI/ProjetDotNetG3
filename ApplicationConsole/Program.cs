@@ -1,12 +1,15 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
-using BankLib.Model;
+using BankLib.Entities;
+using BankLib.Models;
+using System.Numerics;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        bool logged = false;
+        //bool logged = false;
+        bool logged = true;
         Console.WriteLine("[| Bienvenue sur l'application console |]");
         while (!logged)
         {
@@ -25,11 +28,11 @@ internal class Program
                     {
                         logged = true;
                     }
-                    else 
+                    else
                     {
                         Console.WriteLine("L'inscription a échoué veuillez réessayer");
                     }
-                    
+
                     break;
                 case ConsoleKey.NumPad2:
                     Console.WriteLine("- Quel est votre nom d'utilisateur ?");
@@ -50,16 +53,32 @@ internal class Program
             }
         }
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        ClientRepository clientRepo = new ClientRepository();
-        List<Client> clients = clientRepo.getClients();
-        clients.ForEach(client => Console.WriteLine(client.toString()));
+        //ClientRepository clientRepo = new ClientRepository();
+        //List<Client> clients = clientRepo.getClients();
+        //clients.ForEach(client => Console.WriteLine(client.toString()));
         //clientRepo.InsertClient(new ClientPart(3, "BETY", new Adresse("12, rue des Oliviers","","94000","CRETEIL"),"bety@gmail.com",2,new DateTime(1985,11,12),"Daniel",Sexe.Homme));
         //clientRepo.InsertClient(new ClientPro(4, "AXA", new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS"), "info@axa.fr", 2, "125487956411", StatutJuridique.SARL, new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS")));
-        Console.WriteLine("----------------------------------------");
-        clients = clientRepo.getClients(); 
-        clients.ForEach(client => Console.WriteLine(client.toString())); 
+        //Console.WriteLine("----------------------------------------");
+        //clients = clientRepo.getClients(); 
+        //clients.ForEach(client => Console.WriteLine(client.toString())); 
+
+        CompteBancaireTests();
+
     }
 
-    
+    private static void CompteBancaireTests()
+    {
+        CompteBancaireRepository cbr = new CompteBancaireRepository();
+        List<CompteBancaireModel> cbmList = cbr.GetCompteBancaires();
+        foreach (var c in cbmList)
+        {
+            Console.WriteLine($"{c.NumCompte} ouvert au {c.DateOuverture}. Solde :\t{c.Solde}");
+        }
 
+        CompteBancaireModel cbm = cbr.GetCompteBancaire(1);
+        Console.WriteLine($"{cbm.NumCompte} ouvert au {cbm.DateOuverture}. Solde :\t{cbm.Solde}");
+
+        CompteBancaire cb= new CompteBancaire();
+        cbr.InsertCompteBancaire(cb);
+    }
 }

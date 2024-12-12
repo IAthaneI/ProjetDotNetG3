@@ -1,5 +1,4 @@
-﻿using BankLib.Utilities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BankLib.Entities
 {
@@ -8,30 +7,20 @@ namespace BankLib.Entities
     /// </summary>
     public class CompteBancaire
     {
-        // parametre : nombre de caractères d'un numéro de compte
-        private const int tailleNumCompte = 10;
-
-        private string numCompte;
-
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string NumCompte
-        {
-            get => numCompte;
-            private set
-            {
-                numCompte = RandomTool.RandomString(tailleNumCompte);
-            }
-        }
+        [StringLength(10)]
+        public string NumCompte { get; set; }
 
         [Required]
-        public DateOnly DateOuverture { get; set; }
+        public DateTime DateOuverture { get; set; } = DateTime.Today;
 
         [Required]
         public double Solde { get; set; } = 1000;
 
         public List<CarteBancaire>? CarteBancaireList { get; set; }
+
     }
 }
