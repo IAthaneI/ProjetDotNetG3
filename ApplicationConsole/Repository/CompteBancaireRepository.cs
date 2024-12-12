@@ -160,6 +160,14 @@ namespace ApplicationConsole.Repository
             return res > 0;
         }
 
+        /// <summary>
+        /// Va verifier si le montant saisie peut-être retirer du solde
+        /// </summary>
+        /// <param name="idCarteBancaire"></param>
+        /// <param name="Montant"></param>
+        /// <returns>
+        /// true si on peut retirer le montant, false si le solde est trop bas
+        /// </returns>
         public bool CheckNegativeOperation(int idCarteBancaire, int Montant)
         {
             connection = DBUtilities.GetConnection();
@@ -183,6 +191,13 @@ namespace ApplicationConsole.Repository
             return false;
         }
 
+        /// <summary>
+        /// Va mettre a jour le solde du compte passer en parametre
+        /// </summary>
+        /// <param name="compteBancaire"></param>
+        /// <returns>
+        /// true si le solde a bien été mis a jour, false sinon 
+        /// </returns>
         public bool UpdateSoldeCompteBancaire(CompteBancaire compteBancaire)
         {
             int res = 0;

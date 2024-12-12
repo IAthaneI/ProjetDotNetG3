@@ -8,6 +8,9 @@ using BankLib.Exceptions;
 
 namespace BankLib.Model
 {
+    /// <summary>
+    /// Classe qui represente la base d'un client 
+    /// </summary>
     public abstract class Client
     {
         private int identifiant;

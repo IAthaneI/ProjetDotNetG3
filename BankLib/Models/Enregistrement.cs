@@ -7,6 +7,9 @@ using BankLib.Entities;
 
 namespace BankLib.Models
 {
+    /// <summary>
+    /// Reprensation d'une operation bancaire
+    /// </summary>
     public class Enregistrement
     {
         private int id;

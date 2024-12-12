@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BankLib.Model
 {
+    /// <summary>
+    /// Representation d'une adresse postale 
+    /// </summary>
     public class Adresse
     {
         private string? libelle;

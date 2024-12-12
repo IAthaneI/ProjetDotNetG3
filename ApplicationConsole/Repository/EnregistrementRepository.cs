@@ -11,12 +11,21 @@ using Microsoft.Identity.Client;
 
 namespace ApplicationConsole.Repository
 {
+    /// <summary>
+    /// Cette classe va avoir toute les methodes pour acceder au enregistrement en base 
+    /// </summary>
     internal class EnregistrementRepository
     {
         private DbConnection? connection;
 
         public EnregistrementRepository() { }
 
+        /// <summary>
+        /// Va récuperer tout les Enregistrements en bases
+        /// </summary>
+        /// <returns>
+        /// Une liste d'enregistrement
+        /// </returns>
         public List<Enregistrement> GetEnregistrements() 
         {
             List<Enregistrement> result = new List<Enregistrement>();
@@ -40,6 +49,13 @@ namespace ApplicationConsole.Repository
             return result;
         }
 
+        /// <summary>
+        /// Recupere un enregistrement celon l'ID précisé
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>
+        /// L'enregistrement si il existe, null sinon 
+        /// </returns>
         public Enregistrement? GetEnregistrement(int id) 
         {
             Enregistrement? result = null;
@@ -65,6 +81,13 @@ namespace ApplicationConsole.Repository
             return result;
         }
 
+        /// <summary>
+        /// Permet d'inserer un enregistrement en base
+        /// </summary>
+        /// <param name="toInsert"></param>
+        /// <returns>
+        /// true si il a bien été inserer , false si ça a échouer
+        /// </returns>
         public bool InsertEnregistrement(Enregistrement toInsert) 
         {
             connection = DBUtilities.GetConnection();

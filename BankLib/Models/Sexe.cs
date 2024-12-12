@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BankLib.Model
 {
+    /// <summary>
+    /// Represente les differents sexe pour une personne
+    /// </summary>
     public enum Sexe
     {
         Homme,

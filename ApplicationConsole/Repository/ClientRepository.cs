@@ -4,6 +4,9 @@ using ApplicationConsole.Utilities;
 
 namespace ApplicationConsole.Repository
 {
+    /// <summary>
+    /// Cette classe va avoir toute les methodes pour acceder aux clients en base 
+    /// </summary>
     internal class ClientRepository
     {
         private DbConnection? connection;
@@ -12,6 +15,12 @@ namespace ApplicationConsole.Repository
 
         }
 
+        /// <summary>
+        /// Recupere tout les clients présent en base, Particuliers ET Professionnel
+        /// </summary>
+        /// <returns>
+        /// La liste des clients présent en base
+        /// </returns>
         public List<Client> getClients()
         {
 
@@ -54,6 +63,13 @@ namespace ApplicationConsole.Repository
             return clients;
         }
 
+        /// <summary>
+        /// Recupere un client en base celon l'Id, qu'ils soit un particulier ou un professionel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>
+        /// Le client si il existe, null sinon 
+        /// </returns>
         public Client? getClient(int id)
         {
             this.connection = DBUtilities.GetConnection();
@@ -102,6 +118,13 @@ namespace ApplicationConsole.Repository
             return client;
         }
 
+        /// <summary>
+        /// Va inserer un client en base 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns>
+        /// True si il a bien été inserer, False sinon 
+        /// </returns>
         public bool InsertClient(Client client)
         {
             this.connection = DBUtilities.GetConnection();

@@ -8,6 +8,9 @@ using BankLib.Exceptions;
 
 namespace BankLib.Model
 {
+    /// <summary>
+    /// Representation d'un client professionnel (Entreprise)
+    /// </summary>
     public class ClientPro : Client
     {
         private int ident;

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BankLib.Model
 {
+    /// <summary>
+    /// Represente un statut juridique pour une entreprise 
+    /// </summary>
     public enum StatutJuridique
     {
         SA,
