@@ -57,7 +57,15 @@ internal class Program
         Console.WriteLine("[| Vous êtes connecter ! |]");
         ClientTests();
         //CompteBancaireTests();
+        EnregistrementTests();
 
+    }
+
+    private static void EnregistrementTests() 
+    {
+        EnregistrementRepository enregistrementRepository = new EnregistrementRepository();
+        //enregistrementRepository.InsertEnregistrement(new Enregistrement(3, "4974018502230236", 28.5, TypeOperation.Depot, DateTime.Now, 3));
+        enregistrementRepository.GetEnregistrements().ForEach(e => Console.WriteLine($"{e.NumCarte} {e.Id} {e.Type} {e.Montant} {e.Date:dd/MM/yyyy}"));
     }
 
     private static void ClientTests() 
@@ -68,7 +76,7 @@ internal class Program
             List<Client> clients = clientRepo.getClients();
             clients.ForEach(client => Console.WriteLine(client.toString()));
             //clientRepo.InsertClient(new ClientPart(3, "BETY", new Adresse("12, rue des Oliviers", "", "94000", "CRETEIL"), "bety@gmail.com", 2, new DateTime(1985, 11, 12), "Daniel", Sexe.Homme));
-            clientRepo.InsertClient(new ClientPro(4, "AXA", new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS"), "info@axa.fr", 2, "125487956411", StatutJuridique.SARL, new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS")));
+            clientRepo.InsertClient(new ClientPro(4, "AXA", new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS"), "info@axa.fr", 1 , 2, "12548795641120", StatutJuridique.SARL, new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS")));
             Console.WriteLine("----------------------------------------");
             clients = clientRepo.getClients();
             clients.ForEach(client => Console.WriteLine(client.toString()));
