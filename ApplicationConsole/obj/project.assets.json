@@ -4507,23 +4507,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rin\\.nuget\\packages\\": {},
+    "C:\\Users\\Athane\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\ApplicationConsole.csproj",
+      "projectUniqueName": "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\ApplicationConsole\\ApplicationConsole.csproj",
       "projectName": "ApplicationConsole",
-      "projectPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\ApplicationConsole.csproj",
-      "packagesPath": "C:\\Users\\Rin\\.nuget\\packages\\",
-      "outputPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\obj\\",
+      "projectPath": "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\ApplicationConsole\\ApplicationConsole.csproj",
+      "packagesPath": "C:\\Users\\Athane\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\ApplicationConsole\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Rin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Athane\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4532,15 +4532,19 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
             "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\BankLib.csproj": {
               "projectPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\BankLib.csproj"
+=======
+            "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\BankLib\\BankLib.csproj": {
+              "projectPath": "C:\\Users\\Athane\\source\\repos\\ProjetDotNetG3\\BankLib\\BankLib.csproj"
+>>>>>>> 0d3890a20840c3924b7a61bdbb25e268e9ae7dc3
             }
           }
         }
@@ -4553,7 +4557,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -4604,7 +4608,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

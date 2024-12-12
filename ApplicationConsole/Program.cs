@@ -1,6 +1,8 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
 using BankLib.Entities;
+using BankLib.Exceptions;
+using BankLib.Model;
 using BankLib.Models;
 using System.Numerics;
 
@@ -53,18 +55,33 @@ internal class Program
             }
         }
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        //ClientRepository clientRepo = new ClientRepository();
-        //List<Client> clients = clientRepo.getClients();
-        //clients.ForEach(client => Console.WriteLine(client.toString()));
-        //clientRepo.InsertClient(new ClientPart(3, "BETY", new Adresse("12, rue des Oliviers","","94000","CRETEIL"),"bety@gmail.com",2,new DateTime(1985,11,12),"Daniel",Sexe.Homme));
-        //clientRepo.InsertClient(new ClientPro(4, "AXA", new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS"), "info@axa.fr", 2, "125487956411", StatutJuridique.SARL, new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS")));
-        //Console.WriteLine("----------------------------------------");
-        //clients = clientRepo.getClients(); 
-        //clients.ForEach(client => Console.WriteLine(client.toString())); 
+        ClientTests();
+        //CompteBancaireTests();
 
-        CompteBancaireTests();
+    }
 
+<<<<<<< HEAD
         CarteBancaireTests();
+=======
+    private static void ClientTests() 
+    {
+        try
+        {
+            ClientRepository clientRepo = new ClientRepository();
+            List<Client> clients = clientRepo.getClients();
+            clients.ForEach(client => Console.WriteLine(client.toString()));
+            //clientRepo.InsertClient(new ClientPart(3, "BETY", new Adresse("12, rue des Oliviers", "", "94000", "CRETEIL"), "bety@gmail.com", 2, new DateTime(1985, 11, 12), "Daniel", Sexe.Homme));
+            clientRepo.InsertClient(new ClientPro(4, "AXA", new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS"), "info@axa.fr", 2, "125487956411", StatutJuridique.SARL, new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS")));
+            Console.WriteLine("----------------------------------------");
+            clients = clientRepo.getClients();
+            clients.ForEach(client => Console.WriteLine(client.toString()));
+
+        }
+        catch (ClientException e)
+        {
+            Console.WriteLine($"Une erreur a été détecter : Code - {e.Code} {e.Mes}");
+        }
+>>>>>>> 0d3890a20840c3924b7a61bdbb25e268e9ae7dc3
     }
 
     private static void CompteBancaireTests()

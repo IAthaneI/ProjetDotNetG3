@@ -115,7 +115,7 @@ namespace ApplicationConsole.Repository
                 DBUtilities.AddParameter(command, "Complement", client.Adresse.Complement, "ComplementPostale");
                 DBUtilities.AddParameter(command, "Cp", client.Adresse.Cp, "CpPostale");
                 DBUtilities.AddParameter(command, "Ville", client.Adresse.Ville, "VillePostale");
-                DBUtilities.AddParameter(command, "Mail", client.Mail, "Mail");
+                DBUtilities.AddParameter(command, "Ville", client.Mail, "Mail");
 
 
                 int result = command.ExecuteNonQuery();
@@ -169,6 +169,7 @@ namespace ApplicationConsole.Repository
 
                 return false;
             }
+
         }
 
 
