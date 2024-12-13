@@ -1,17 +1,22 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
+using Azure;
 using BankLib.Entities;
 using BankLib.Exceptions;
 using BankLib.Model;
 using BankLib.Models;
 using System.Numerics;
+using System.Runtime.Serialization;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        //bool logged = false;
-        bool logged = true;
+        bool logged = false;
+        ClientRepository clientRepository = new ClientRepository();
+        EnregistrementRepository enregistrementRepository = new EnregistrementRepository();
+        CarteBancaireRepository carteBancaireRepository = new CarteBancaireRepository();
+        CompteBancaireRepository compteBancaireRepository = new CompteBancaireRepository();
         Console.WriteLine("[| Bienvenue sur l'application console |]");
         while (!logged)
         {
@@ -22,7 +27,7 @@ internal class Program
             switch (key.Key)
             {
                 case ConsoleKey.NumPad1:
-                    Console.WriteLine("- Quel est votre nom d'utilisateur ?");
+                    Console.WriteLine("\n- Quel est votre nom d'utilisateur ?");
                     string? loginR = Console.ReadLine();
                     Console.WriteLine("- Quel est votre mot de passe ?");
                     string? passwordR = Console.ReadLine();
@@ -37,7 +42,7 @@ internal class Program
 
                     break;
                 case ConsoleKey.NumPad2:
-                    Console.WriteLine("- Quel est votre nom d'utilisateur ?");
+                    Console.WriteLine("\n- Quel est votre nom d'utilisateur ?");
                     string? loginL = Console.ReadLine();
                     Console.WriteLine("- Quel est votre mot de passe ?");
                     string? passwordL = Console.ReadLine();
@@ -54,59 +59,182 @@ internal class Program
                     break;
             }
         }
+        bool end = false;
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        ClientTests();
-        //CompteBancaireTests();
-
-    }
-
-    private static void ClientTests() 
-    {
-        try
+        while (!end) 
         {
-            ClientRepository clientRepo = new ClientRepository();
-            List<Client> clients = clientRepo.getClients();
-            clients.ForEach(client => Console.WriteLine(client.toString()));
-            //clientRepo.InsertClient(new ClientPart(3, "BETY", new Adresse("12, rue des Oliviers", "", "94000", "CRETEIL"), "bety@gmail.com", 2, new DateTime(1985, 11, 12), "Daniel", Sexe.Homme));
-            clientRepo.InsertClient(new ClientPro(4, "AXA", new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS"), "info@axa.fr", 2, "125487956411", StatutJuridique.SARL, new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS")));
-            Console.WriteLine("----------------------------------------");
-            clients = clientRepo.getClients();
-            clients.ForEach(client => Console.WriteLine(client.toString()));
+            Console.WriteLine("\n- Que souhaitais vous faires ?");
+            Console.WriteLine("1) Lister les clients");
+            Console.WriteLine("2) Lister les comptes");
+            Console.WriteLine("3) Lister les operations");
+            Console.WriteLine("4) Lister les operations d'un client");
+            Console.WriteLine("5) Voir les details d'un client");
+            Console.WriteLine("6) Saisir un client");
+            Console.WriteLine("7) Saisir un compte");
+            Console.WriteLine("8) Saisir une carte bancaire");
+            Console.WriteLine("9) Saisir une operation");
+            Console.WriteLine("Q) Quitter");
+            var key = Console.ReadKey();
+            switch (key.Key)
+            {
+                case ConsoleKey.NumPad1:
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    clientRepository.getClients().ForEach(c => Console.WriteLine(c.toString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
+                    break;
+                case ConsoleKey.NumPad2:
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    compteBancaireRepository.GetCompteBancaires().ForEach(c => Console.WriteLine(c.ToString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
+                    break;
+                case ConsoleKey.NumPad3:
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    enregistrementRepository.GetEnregistrements().ForEach(e => Console.WriteLine(e.ToString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
+                    break;
+                case ConsoleKey.NumPad4:
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    Int32.TryParse(Console.ReadLine(), out int idOpt4);
+                    enregistrementRepository.GetEnregistrementsOfClient(idOpt4).ForEach(e => Console.WriteLine(e.ToString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
+                    break;
+                case ConsoleKey.NumPad5:
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    Int32.TryParse(Console.ReadLine(), out int idOpt5);
+                    Console.WriteLine("Client : ");
+                    Client? client = clientRepository.getClient(idOpt5);
+                    if (client != null) 
+                    {
+                        Console.WriteLine(client.toString());
+                        Console.WriteLine("Compte :");
+                        Console.WriteLine(compteBancaireRepository.GetCompteBancaire(client.IdCompte).ToString());
+                        Console.WriteLine("Carte bancaire : ");
+                        carteBancaireRepository.GetCarteBancaireOfCompte(client.IdCompte).ForEach(c => Console.WriteLine(c.ToString()));
+                        Console.WriteLine("Opération : ");
+                        enregistrementRepository.GetEnregistrementsOfClient(idOpt5).ForEach(e => Console.WriteLine(e.ToString()));
+                    }
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
+                    break;
+                case ConsoleKey.NumPad6:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad7:
+                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    break;
+                case ConsoleKey.NumPad8:
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    CarteBancaire toInsert = new CarteBancaire();
+                    Console.WriteLine("Sur quelle compte voulez vous ajoutez une Carte ?");
+                    Int32.TryParse(Console.ReadLine(), out int idCompte);
+                    toInsert.Id = carteBancaireRepository.GetNewMaxId();
+                    toInsert.NumCarteSuffixe = 0;
+                    toInsert.DateExpiration = new DateOnly(DateTime.Now.AddYears(5).Year, DateTime.Now.Month, DateTime.Now.Day);
+                    toInsert.CompteBancaireId = idCompte; 
+                    toInsert.NomTitulaire = compteBancaireRepository.GetNomClientByIdCompte(idCompte);
+                    if (!String.IsNullOrEmpty(toInsert.NomTitulaire)) 
+                    {
+
+                    }
+                    else 
+                    {
+                        Console.WriteLine("Le client ou le Compte associé n'a pas été trouvé");
+                    }
+                    break;
+                case ConsoleKey.NumPad9:
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    int id = enregistrementRepository.GetNewMaxId();
+                    Console.WriteLine("Sur quelle numero de carte voulez vous effectuez l'operation ?");
+                    string NumCarte = Console.ReadLine();
+                    Console.WriteLine("Quel est le montant de l'operation ? ");
+                    double Montant = Double.Parse(Console.ReadLine());
+                    Console.WriteLine("Quel type d'operation voulez vous effectuez ? ");
+                    Console.WriteLine("1) Depot");
+                    Console.WriteLine("2) Retrait");
+                    Console.WriteLine("3) Facture Carte bancaire");
+                    key = Console.ReadKey();
+                    bool typeError = false;
+                    TypeOperation type = TypeOperation.Depot;
+                    switch (key.Key) 
+                    {
+                        case ConsoleKey.NumPad1:
+                            type = TypeOperation.Depot;
+                            break;
+                        case ConsoleKey.NumPad2:
+                            type = TypeOperation.Retrait; 
+                            break;
+                        case ConsoleKey.NumPad3:
+                            type = TypeOperation.Facture; 
+                            break;
+                        default : 
+                            typeError = true;
+                            Console.WriteLine("\nCette option n'existe pas, abandon de l'ajout"); 
+                            break;
+                    }
+
+                    if (!typeError) 
+                    {
+                        int idCB = carteBancaireRepository.GetIdCarteBancaireByNumCarte(NumCarte);
+                        if (idCB == -1)
+                            Console.WriteLine("\nCarte bancaire introuvable ");
+                        else 
+                        {
+                            bool opRealisable = true;
+                            if (type.Equals(TypeOperation.Retrait) || type.Equals(TypeOperation.Facture))
+                            {
+                                opRealisable = compteBancaireRepository.CheckNegativeOperation(idCB,Montant);
+                            }
+
+                            if (opRealisable)
+                            {
+                                CompteBancaire comp = compteBancaireRepository.GetCompteBancaireByIdCarte(idCB);
+                                if (type.Equals(TypeOperation.Retrait) || type.Equals(TypeOperation.Facture))
+                                {
+                                    comp.Solde = comp.Solde - Montant;
+                                }
+                                else 
+                                {
+                                    comp.Solde = comp.Solde + Montant;
+                                }
+                                compteBancaireRepository.UpdateSoldeCompteBancaire(comp);
+                                Enregistrement enr = new Enregistrement(id, NumCarte, Montant, type, DateTime.Now, idCB);
+                                bool result = enregistrementRepository.InsertEnregistrement(enr);
+                                if (result)
+                                {
+                                    Console.WriteLine("\nLa nouvelle operation a bien été ajouter");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nImpossible d'ajouter la nouvelle operation");
+                                }
+                            }
+                            else 
+                            {
+                                Console.WriteLine("\nL'operation n'est pas realisable car le solde est trop bas");
+                            }
+                        }
+                    }
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
+                    break;
+                case ConsoleKey.Q:
+                    Console.WriteLine("\nAu revoir !");
+                    Console.WriteLine("[| Vous avez été déconnecté |]");
+                    end = true;
+                    break;
+                default:
+                    break;
+            }
         }
-        catch (ClientException e)
-        {
-            Console.WriteLine($"Une erreur a été détecter : Code - {e.Code} {e.Mes}");
-        }
-    }
-
-    private static void CompteBancaireTests()
-    {
-        CompteBancaireRepository cbr = new CompteBancaireRepository();
-        List<CompteBancaireModel> cbmList = cbr.GetCompteBancaires();
-        foreach (var c in cbmList)
-        {
-            Console.WriteLine($"{c.NumCompte} ouvert au {c.DateOuverture}. Solde :\t{c.Solde} Eur");
-        }
-
-        CompteBancaireModel cbm = cbr.GetCompteBancaire(1);
-        Console.WriteLine($"{cbm.NumCompte} ouvert au {cbm.DateOuverture}. Solde :\t{cbm.Solde} Eur");
-
-        Console.WriteLine("Insertion " + cbr.InsertCompteBancaire(new CompteBancaireModel()));
-    }
-
-    private static void CarteBancaireTests()
-    {
-        CarteBancaireRepository cbr = new CarteBancaireRepository();
-        List<CarteBancaireModel> cbmList = cbr.GetCarteBancaires();
-        foreach (var c in cbmList)
-        {
-            Console.WriteLine($"Carte {c.NumCarte} pour le compte {c.CompteBancaireId} de {c.NomTitulaire}, expire au {c.DateExpiration}");
-        }
-
-        CarteBancaireModel cbm = cbr.GetCarteBancaire(2);
-        if(cbm != null)
-            Console.WriteLine($"Carte {cbm.NumCarte} pour le compte {cbm.CompteBancaireId} de {cbm.NomTitulaire}, expire au {cbm.DateExpiration}");
-
-        Console.WriteLine("Insertion " + cbr.InsertCarteBancaire(new CarteBancaireModel() { NomTitulaire = "Hardman", CompteBancaireId = 1}));
     }
 }
