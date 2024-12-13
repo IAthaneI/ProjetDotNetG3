@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankLib.Model
+
+namespace BankLib.Models
 {
     /// <summary>
-    /// Represente les differents sexe pour une personne
+    /// Represente un Type d'operation bancaire
     /// </summary>
-    public enum Sexe
+    public enum TypeOperation
     {
-        Homme,
-        Femme,
-        Autre
+        Retrait,
+        Facture,
+        Depot
     }
 }

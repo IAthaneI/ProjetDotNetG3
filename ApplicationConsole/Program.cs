@@ -1,18 +1,23 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
+using Azure;
 using BankLib.Entities;
 using BankLib.Exceptions;
 using BankLib.Model;
 using BankLib.Models;
 using BankLib.Utilities;
 using System.Numerics;
+using System.Runtime.Serialization;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        //bool logged = false;
-        bool logged = true;
+        bool logged = false;
+        ClientRepository clientRepository = new ClientRepository();
+        EnregistrementRepository enregistrementRepository = new EnregistrementRepository();
+        CarteBancaireRepository carteBancaireRepository = new CarteBancaireRepository();
+        CompteBancaireRepository compteBancaireRepository = new CompteBancaireRepository();
         Console.WriteLine("[| Bienvenue sur l'application console |]");
         while (!logged)
         {
@@ -23,7 +28,7 @@ internal class Program
             switch (key.Key)
             {
                 case ConsoleKey.NumPad1:
-                    Console.WriteLine("- Quel est votre nom d'utilisateur ?");
+                    Console.WriteLine("\n- Quel est votre nom d'utilisateur ?");
                     string? loginR = Console.ReadLine();
                     Console.WriteLine("- Quel est votre mot de passe ?");
                     string? passwordR = Console.ReadLine();
@@ -38,7 +43,7 @@ internal class Program
 
                     break;
                 case ConsoleKey.NumPad2:
-                    Console.WriteLine("- Quel est votre nom d'utilisateur ?");
+                    Console.WriteLine("\n- Quel est votre nom d'utilisateur ?");
                     string? loginL = Console.ReadLine();
                     Console.WriteLine("- Quel est votre mot de passe ?");
                     string? passwordL = Console.ReadLine();
@@ -55,16 +60,15 @@ internal class Program
                     break;
             }
         }
+        bool end = false;
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        ClientTests(false);
-        CompteBancaireTests(false);
-        CarteBancaireTests(false);
-        OperationXmlTest();
+        ClientTests();
+        //CompteBancaireTests();
+
     }
 
-    private static void ClientTests(bool run = true) 
+    private static void ClientTests() 
     {
-        if (!run) return;
         try
         {
             ClientRepository clientRepo = new ClientRepository();
@@ -82,9 +86,8 @@ internal class Program
         }
     }
 
-    private static void CompteBancaireTests(bool run = true)
+    private static void CompteBancaireTests()
     {
-        if (!run) return;
         CompteBancaireRepository cbr = new CompteBancaireRepository();
         List<CompteBancaireModel> cbmList = cbr.GetCompteBancaires();
         foreach (var c in cbmList)
@@ -98,21 +101,14 @@ internal class Program
         Console.WriteLine("Insertion " + cbr.InsertCompteBancaire(new CompteBancaireModel()));
     }
 
-    private static void CarteBancaireTests(bool run = true)
+    private static void CarteBancaireTests()
     {
-        if (!run) return;
         CarteBancaireRepository cbr = new CarteBancaireRepository();
         List<CarteBancaireModel> cbmList = cbr.GetCarteBancaires();
         foreach (var c in cbmList)
         {
             Console.WriteLine($"Carte {c.NumCarte} pour le compte {c.CompteBancaireId} de {c.NomTitulaire}, expire au {c.DateExpiration}");
         }
-
-        CarteBancaireModel cbm = cbr.GetCarteBancaire(2);
-        if(cbm != null)
-            Console.WriteLine($"Carte {cbm.NumCarte} pour le compte {cbm.CompteBancaireId} de {cbm.NomTitulaire}, expire au {cbm.DateExpiration}");
-
-        Console.WriteLine("Insertion " + cbr.InsertCarteBancaire(new CarteBancaireModel() { NomTitulaire = "Hardman", CompteBancaireId = 1}));
     }
 
     private static void OperationXmlTest(bool run = true)

@@ -52,6 +52,37 @@ namespace ApplicationConsole.Repository
             return cModels;
         }
 
+        public String GetNomClientByIdCompte(int idCompte)
+        {
+            String result  = "";
+            if (connection != null)
+            {
+                string query = "SELECT Nom FROM CompteBancaire JOIN Client ON CompteBancaire.Id = Client.IdCompte WHERE CompteBancaire.Id = @Id";
+                try
+                {
+                    connection.Open();
+                    DbCommand command = connection.CreateCommand();
+                    command.CommandText = query;
+                    DBUtilities.AddParameter(command, "Id", idCompte, "Id" );
+                    DbDataReader dbDataReader = command.ExecuteReader();
+
+                    if (dbDataReader.Read()) 
+                    { 
+                        result = dbDataReader.GetString(0);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Récupère un compte en DBB
         /// </summary>
@@ -160,6 +191,97 @@ namespace ApplicationConsole.Repository
                 }
             }
             return res > 0;
+        }
+
+        /// <summary>
+        /// Va verifier si le montant saisie peut-être retirer du solde
+        /// </summary>
+        /// <param name="idCarteBancaire"></param>
+        /// <param name="Montant"></param>
+        /// <returns>
+        /// true si on peut retirer le montant, false si le solde est trop bas
+        /// </returns>
+        public bool CheckNegativeOperation(int idCarteBancaire, Double Montant)
+        {
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = "SELECT co.Solde as Solde FROM CompteBancaire co JOIN CarteBancaire ca ON co.Id = ca.CompteBancaireId WHERE ca.Id = @Id";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+                DBUtilities.AddParameter(command, "Id", idCarteBancaire, "ca.Id");
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    return Double.Parse(reader["Solde"].ToString()) > Montant;
+                }
+
+                connection.Close();
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Va mettre a jour le solde du compte passer en parametre
+        /// </summary>
+        /// <param name="compteBancaire"></param>
+        /// <returns>
+        /// true si le solde a bien été mis a jour, false sinon 
+        /// </returns>
+        public bool UpdateSoldeCompteBancaire(CompteBancaire compteBancaire)
+        {
+            int res = 0;
+            if (connection != null)
+            {
+                string query = "UPDATE CompteBancaire SET Solde = @NewSolde WHERE Id = @Id";
+                try
+                {
+                    connection.Open();
+                    DbCommand command = connection.CreateCommand();
+                    command.CommandText = query;
+                    DBUtilities.AddParameter(command, "NewSolde", compteBancaire.Solde, "Solde");
+                    DBUtilities.AddParameter(command, "Id", compteBancaire.Id, "Id");
+                    res = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return res > 0;
+        }
+
+        public CompteBancaire GetCompteBancaireByIdCarte(int idCarte)
+        {
+            CompteBancaire comp = new CompteBancaire();
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = "SELECT co.Id, co.NumCompte, co.DateOuverture, co.Solde FROM CarteBancaire ca JOIN CompteBancaire co ON ca.CompteBancaireId = co.Id WHERE ca.Id = @Id";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+                DBUtilities.AddParameter(command, "Id", idCarte, "Id");
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    comp.Id = reader.GetInt32(0);
+                    comp.NumCompte = reader.GetString(1);
+                    comp.DateOuverture = reader.GetDateTime(2);
+                    comp.Solde = Double.Parse(reader.GetDecimal(3).ToString());
+                }
+                connection.Close();
+            }
+            return comp;
         }
 
         /// <summary>

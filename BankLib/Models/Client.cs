@@ -8,19 +8,24 @@ using BankLib.Exceptions;
 
 namespace BankLib.Model
 {
+    /// <summary>
+    /// Classe qui represente la base d'un client 
+    /// </summary>
     public abstract class Client
     {
         private int identifiant;
         private string? nom;
         private Adresse? adresse;
         private string? mail;
+        private int idCompte;
 
-        protected Client(int identifiant, string? nom, Adresse? adresse, string? mail)
+        protected Client(int identifiant, string? nom, Adresse? adresse, string? mail, int idCompte)
         {
             Identifiant = identifiant;
             Nom = nom;
             Adresse = adresse;
             Mail = mail;
+            IdCompte = idCompte;
         }
 
         public int Identifiant { get => identifiant; set => identifiant = value; }
@@ -33,6 +38,7 @@ namespace BankLib.Model
                 mail = value;
             } }
         public Adresse? Adresse { get => adresse; set => adresse = value; }
+        public int IdCompte { get => idCompte; set => idCompte = value; }
 
         public abstract string toString();
     }
