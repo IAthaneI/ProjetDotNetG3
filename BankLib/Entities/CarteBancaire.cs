@@ -20,20 +20,6 @@ namespace BankLib.Entities
         [XmlElement(Order = 1)]
         public int Id { get; set; }
 
-        [NotMapped]
-        [Range(0, 9999)]
-        public int NumCarteSuffixe
-        {
-            get => numCarteSuffixe;
-            set
-            {
-                if (value > 0) 
-                    numCarteSuffixe = value;
-                else 
-                    numCarteSuffixe = RandomTool.RandomInt(9999);
-            }
-        }
-
         [Required]
         [Range(0, Constantes.CARTE_BANCAIRE_NUM_MAX_VAL)]
         public int NumCarte { get; set; }
@@ -57,7 +43,7 @@ namespace BankLib.Entities
 
         public override string ToString()
         {
-            return $"Carte Bancaire {Id} : {NumCarte} {DateExpiration:dd/MM/yyyy} {NomTitulaire}";
+            return $"Carte Bancaire {Id} : {NumCarteDisplay} {DateExpiration:dd/MM/yyyy} {NomTitulaire}";
         }
     }
 }

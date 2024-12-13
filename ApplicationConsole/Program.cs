@@ -5,6 +5,7 @@ using BankLib.Entities;
 using BankLib.Exceptions;
 using BankLib.Model;
 using BankLib.Models;
+using Microsoft.Identity.Client;
 using System.Numerics;
 using System.Runtime.Serialization;
 
@@ -126,29 +127,136 @@ internal class Program
                     Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad6:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    Console.WriteLine("Quel genre de clients voulez vous créez ? ");
+                    Console.WriteLine("1) Client Particulier");
+                    Console.WriteLine("2) Client Professionnel");
+                    key = Console.ReadKey();
+                    try
+                    {
+                        switch (key.Key)
+                        {
+                            case ConsoleKey.NumPad1:
+                                ClientPart cpa = new ClientPart();
+                                GetClientInformation(cpa);
+
+                                cpa.Ident = clientRepository.GetNewMaxId("Id", "ClientsParticuliers");
+                                Console.WriteLine("Quel est le prénom du client ? ");
+                                cpa.Prenom = Console.ReadLine();
+                                Console.WriteLine("Quel est le sexe du client ?");
+                                Console.WriteLine("1) Homme");
+                                Console.WriteLine("2) Femme");
+                                Console.WriteLine("3) Autre");
+                                var keySexe = Console.ReadKey();
+                                switch (keySexe.Key)
+                                {
+
+                                    case ConsoleKey.NumPad1:
+                                        cpa.Sexe = Sexe.Homme;
+                                        break;
+                                    case ConsoleKey.NumPad2:
+                                        cpa.Sexe = Sexe.Femme;
+                                        break;
+                                    default:
+                                        cpa.Sexe = Sexe.Autre;
+                                        break;
+                                }
+                                Console.WriteLine("\nQuel est la date de naissance du client ? (Format : dd/MM/yyyy)");
+                                String[] date = Console.ReadLine().Split("/");
+                                cpa.DateNaissance = new DateTime(Int32.Parse(date[2]), Int32.Parse(date[1]), Int32.Parse(date[0]));
+                                bool insertCpa = clientRepository.InsertClient(cpa);
+                                if (insertCpa) Console.WriteLine("Le nouveau compte à bien été créer");
+                                else Console.WriteLine("Le nouveau compte n'a pas pus être créer");
+                                break;
+                            case ConsoleKey.NumPad2:
+                                ClientPro cpr = new ClientPro();
+                                GetClientInformation(cpr);
+
+                                cpr.Ident = clientRepository.GetNewMaxId("Id", "ClientsProfessionnels");
+                                Adresse a = new Adresse();
+                                Console.WriteLine("Quel est le siret ? ");
+                                cpr.Siret = Console.ReadLine();
+                                Console.WriteLine("Quel est le libelle de l'adresse du siege ?");
+                                a.Libelle = Console.ReadLine();
+                                Console.WriteLine("Quel est le Complement de l'adresse du siege ?");
+                                a.Complement = Console.ReadLine();
+                                Console.WriteLine("Quel est le code postale de l'adresse du siege ?");
+                                a.Cp = Console.ReadLine();
+                                Console.WriteLine("Quel est la ville de l'adresse du siege ?");
+                                a.Ville = Console.ReadLine();
+                                cpr.Siege = a;
+                                Console.WriteLine("Quel est le statut juridique du client ?");
+                                Console.WriteLine("1) SARL");
+                                Console.WriteLine("2) SAS");
+                                Console.WriteLine("3) SA");
+                                Console.WriteLine("4) EURL");
+                                var keyST = Console.ReadKey();
+                                switch (keyST.Key)
+                                {
+                                    case ConsoleKey.NumPad1:
+                                        cpr.StatutJuridique = StatutJuridique.SARL;
+                                        break;
+                                    case ConsoleKey.NumPad2:
+                                        cpr.StatutJuridique = StatutJuridique.SAS;
+                                        break;
+                                    case ConsoleKey.NumPad3:
+                                        cpr.StatutJuridique = StatutJuridique.SA;
+                                        break;
+                                    default:
+                                        cpr.StatutJuridique = StatutJuridique.EURL;
+                                        break;
+                                }
+                                bool insertCpr = clientRepository.InsertClient(cpr);
+                                if (insertCpr) Console.WriteLine("\nLe nouveau compte à bien été créer");
+                                else Console.WriteLine("\nLe nouveau compte n'a pas pus être créer");
+                                break;
+                            default:
+                                Console.WriteLine("\nL'option selectionné n'existe pas");
+                                break;
+                        }
+                    }
+                    catch (ClientException e)
+                    {
+                        Console.WriteLine($"Une erreur a été détécté : Code ${e.Code} - ${e.Mes}");
+                        Console.WriteLine("Ajout du client annulé");
+                    }
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad7:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    CompteBancaireModel toInsertCo = new CompteBancaireModel();
+                    toInsertCo.DateOuverture = DateTime.Now;
+                    toInsertCo.Solde = 1000;
+                    bool insertCo = compteBancaireRepository.InsertCompteBancaire(toInsertCo);
+                    if (insertCo) Console.WriteLine("Le nouveau compte à bien été créer");
+                    else Console.WriteLine("Le nouveau compte n'a pas pus être créer");
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad8:
                     Console.WriteLine("\n[|-----------------------------------------|]");
-                    CarteBancaire toInsert = new CarteBancaire();
+                    CarteBancaireModel toInsert = new CarteBancaireModel();
                     Console.WriteLine("Sur quelle compte voulez vous ajoutez une Carte ?");
                     Int32.TryParse(Console.ReadLine(), out int idCompte);
-                    toInsert.Id = carteBancaireRepository.GetNewMaxId();
-                    toInsert.NumCarteSuffixe = 0;
-                    toInsert.DateExpiration = new DateOnly(DateTime.Now.AddYears(5).Year, DateTime.Now.Month, DateTime.Now.Day);
-                    toInsert.CompteBancaireId = idCompte; 
+                    toInsert.DateExpiration = DateTime.Now.AddYears(5);
+                    toInsert.CompteBancaireId = idCompte;
                     toInsert.NomTitulaire = compteBancaireRepository.GetNomClientByIdCompte(idCompte);
                     if (!String.IsNullOrEmpty(toInsert.NomTitulaire)) 
                     {
-
+                        bool insert = carteBancaireRepository.InsertCarteBancaire(toInsert);
+                        if (insert) Console.WriteLine("La nouvelle carte à bien été ajouté");
+                        else Console.WriteLine("La nouvelle carte n'a pas pus être ajouté");
                     }
                     else 
                     {
                         Console.WriteLine("Le client ou le Compte associé n'a pas été trouvé");
                     }
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad9:
                     Console.WriteLine("\n[|-----------------------------------------|]");
@@ -236,5 +344,27 @@ internal class Program
                     break;
             }
         }
+    }
+
+    public static void GetClientInformation(Client c) 
+    {
+        ClientRepository clientRepository = new ClientRepository();
+        Adresse a = new Adresse();
+        c.Identifiant = clientRepository.GetNewMaxId("Identifiant", "Clients");
+        Console.WriteLine("\nQuel est le nom du client ? ");
+        c.Nom = Console.ReadLine();
+        Console.WriteLine("Quel est le libelle de l'adresse ?");
+        a.Libelle = Console.ReadLine();
+        Console.WriteLine("Quel est le Complement de l'adresse ?");
+        a.Complement = Console.ReadLine();
+        Console.WriteLine("Quel est le code postale de l'adresse ?");
+        a.Cp = Console.ReadLine();
+        Console.WriteLine("Quel est la ville de l'adresse ?");
+        a.Ville = Console.ReadLine();
+        c.Adresse = a;
+        Console.WriteLine("Quel est l'adresse mail du client ? ");
+        c.Mail = Console.ReadLine();
+        Console.WriteLine("Quel est l'id du Compte du client ?");
+        c.IdCompte = Int32.Parse(Console.ReadLine());
     }
 }
