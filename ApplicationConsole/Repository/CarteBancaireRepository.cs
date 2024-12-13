@@ -72,5 +72,28 @@ namespace ApplicationConsole.Repository
             return result;
         }
 
+        public int GetNewMaxId()
+        {
+            int id = -1;
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = "SELECT MAX(Id) as idMax FROM CarteBancaire ";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                }
+
+                connection.Close();
+            }
+            return ++id;
+        }
+
     }
 }

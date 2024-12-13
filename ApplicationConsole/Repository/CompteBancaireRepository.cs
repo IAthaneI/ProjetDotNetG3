@@ -50,6 +50,37 @@ namespace ApplicationConsole.Repository
             return cModels;
         }
 
+        public String GetNomClientByIdCompte(int idCompte)
+        {
+            String result  = "";
+            if (connection != null)
+            {
+                string query = "SELECT Nom FROM CompteBancaire JOIN Client ON CompteBancaire.Id = Client.IdCompte WHERE CompteBancaire.Id = @Id";
+                try
+                {
+                    connection.Open();
+                    DbCommand command = connection.CreateCommand();
+                    command.CommandText = query;
+                    DBUtilities.AddParameter(command, "Id", idCompte, "Id" );
+                    DbDataReader dbDataReader = command.ExecuteReader();
+
+                    if (dbDataReader.Read()) 
+                    { 
+                        result = dbDataReader.GetString(0);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Récupère un compte en DBB
         /// </summary>

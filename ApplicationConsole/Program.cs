@@ -6,6 +6,7 @@ using BankLib.Exceptions;
 using BankLib.Model;
 using BankLib.Models;
 using System.Numerics;
+using System.Runtime.Serialization;
 
 internal class Program
 {
@@ -131,7 +132,23 @@ internal class Program
                     Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
                     break;
                 case ConsoleKey.NumPad8:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    CarteBancaire toInsert = new CarteBancaire();
+                    Console.WriteLine("Sur quelle compte voulez vous ajoutez une Carte ?");
+                    Int32.TryParse(Console.ReadLine(), out int idCompte);
+                    toInsert.Id = carteBancaireRepository.GetNewMaxId();
+                    toInsert.NumCarteSuffixe = 0;
+                    toInsert.DateExpiration = new DateOnly(DateTime.Now.AddYears(5).Year, DateTime.Now.Month, DateTime.Now.Day);
+                    toInsert.CompteBancaireId = idCompte; 
+                    toInsert.NomTitulaire = compteBancaireRepository.GetNomClientByIdCompte(idCompte);
+                    if (!String.IsNullOrEmpty(toInsert.NomTitulaire)) 
+                    {
+
+                    }
+                    else 
+                    {
+                        Console.WriteLine("Le client ou le Compte associé n'a pas été trouvé");
+                    }
                     break;
                 case ConsoleKey.NumPad9:
                     Console.WriteLine("\n[|-----------------------------------------|]");
@@ -160,7 +177,7 @@ internal class Program
                             break;
                         default : 
                             typeError = true;
-                            Console.WriteLine("Cette option n'existe pas, abandon de l'ajout"); 
+                            Console.WriteLine("\nCette option n'existe pas, abandon de l'ajout"); 
                             break;
                     }
 
@@ -168,7 +185,7 @@ internal class Program
                     {
                         int idCB = carteBancaireRepository.GetIdCarteBancaireByNumCarte(NumCarte);
                         if (idCB == -1)
-                            Console.WriteLine("Carte bancaire introuvable ");
+                            Console.WriteLine("\nCarte bancaire introuvable ");
                         else 
                         {
                             bool opRealisable = true;
@@ -193,16 +210,16 @@ internal class Program
                                 bool result = enregistrementRepository.InsertEnregistrement(enr);
                                 if (result)
                                 {
-                                    Console.WriteLine("La nouvelle operation a bien été ajouter");
+                                    Console.WriteLine("\nLa nouvelle operation a bien été ajouter");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Impossible d'ajouter la nouvelle operation");
+                                    Console.WriteLine("\nImpossible d'ajouter la nouvelle operation");
                                 }
                             }
                             else 
                             {
-                                Console.WriteLine("L'operation n'est pas realisable car le solde est trop bas");
+                                Console.WriteLine("\nL'operation n'est pas realisable car le solde est trop bas");
                             }
                         }
                     }
