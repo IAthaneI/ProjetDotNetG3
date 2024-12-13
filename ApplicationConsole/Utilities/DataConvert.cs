@@ -52,6 +52,11 @@ namespace ApplicationConsole.Utilities
             }
             return cbModel;
         }
+
+        internal static List<OperationModel> ToOperationModel(DataTable table)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

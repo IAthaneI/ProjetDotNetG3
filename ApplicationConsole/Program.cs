@@ -4,6 +4,7 @@ using BankLib.Entities;
 using BankLib.Exceptions;
 using BankLib.Model;
 using BankLib.Models;
+using BankLib.Utilities;
 using System.Numerics;
 
 internal class Program
@@ -55,13 +56,15 @@ internal class Program
             }
         }
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        ClientTests();
-        //CompteBancaireTests();
-
+        ClientTests(false);
+        CompteBancaireTests(false);
+        CarteBancaireTests(false);
+        OperationXmlTest();
     }
 
-    private static void ClientTests() 
+    private static void ClientTests(bool run = true) 
     {
+        if (!run) return;
         try
         {
             ClientRepository clientRepo = new ClientRepository();
@@ -79,8 +82,9 @@ internal class Program
         }
     }
 
-    private static void CompteBancaireTests()
+    private static void CompteBancaireTests(bool run = true)
     {
+        if (!run) return;
         CompteBancaireRepository cbr = new CompteBancaireRepository();
         List<CompteBancaireModel> cbmList = cbr.GetCompteBancaires();
         foreach (var c in cbmList)
@@ -94,8 +98,9 @@ internal class Program
         Console.WriteLine("Insertion " + cbr.InsertCompteBancaire(new CompteBancaireModel()));
     }
 
-    private static void CarteBancaireTests()
+    private static void CarteBancaireTests(bool run = true)
     {
+        if (!run) return;
         CarteBancaireRepository cbr = new CarteBancaireRepository();
         List<CarteBancaireModel> cbmList = cbr.GetCarteBancaires();
         foreach (var c in cbmList)
@@ -109,4 +114,19 @@ internal class Program
 
         Console.WriteLine("Insertion " + cbr.InsertCarteBancaire(new CarteBancaireModel() { NomTitulaire = "Hardman", CompteBancaireId = 1}));
     }
+
+    private static void OperationXmlTest(bool run = true)
+    {
+        if(!run) return;
+        OperationModel op = new OperationModel();
+        op.Id = 1;
+        op.NumCarte = "4949494949494949";
+        op.Montant= 500;
+        op.Type = BankLib.Models.Type.Depot;
+        op.DateOp = DateTime.Today;
+        //op.IdCarteBancaire = 2;
+        ParserTool.OperationToXml(op);
+    }
+
+
 }
