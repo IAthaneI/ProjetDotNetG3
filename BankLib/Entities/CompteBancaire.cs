@@ -22,5 +22,10 @@ namespace BankLib.Entities
 
         public List<CarteBancaire>? CarteBancaireList { get; set; }
 
+        public override string ToString()
+        {
+            return $"Compte {Id} : {NumCompte} {DateOuverture:dd/MM/yyyy} {Solde:00000.00} ";
+        }
+
     }
 }

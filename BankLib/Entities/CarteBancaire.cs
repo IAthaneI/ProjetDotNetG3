@@ -24,7 +24,10 @@ namespace BankLib.Entities
             get => numCarteSuffixe;
             set
             {
-                numCarteSuffixe = RandomTool.RandomInt(9999);
+                if (value > 0) 
+                    numCarteSuffixe = value;
+                else 
+                    numCarteSuffixe = RandomTool.RandomInt(9999);
             }
         }
 
@@ -43,5 +46,10 @@ namespace BankLib.Entities
         public int CompteBancaireId { get; set; }
 
         public CompteBancaire CompteBancaire { get; set; }
+
+        public override string ToString()
+        {
+            return $"Carte Bancaire {Id} : {NumCarte} {DateExpiration:dd/MM/yyyy} {NomTitulaire}";
+        }
     }
 }

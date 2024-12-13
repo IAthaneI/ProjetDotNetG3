@@ -1,5 +1,6 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
+using Azure;
 using BankLib.Entities;
 using BankLib.Exceptions;
 using BankLib.Model;
@@ -11,6 +12,10 @@ internal class Program
     private static void Main(string[] args)
     {
         bool logged = false;
+        ClientRepository clientRepository = new ClientRepository();
+        EnregistrementRepository enregistrementRepository = new EnregistrementRepository();
+        CarteBancaireRepository carteBancaireRepository = new CarteBancaireRepository();
+        CompteBancaireRepository compteBancaireRepository = new CompteBancaireRepository();
         Console.WriteLine("[| Bienvenue sur l'application console |]");
         while (!logged)
         {
@@ -57,7 +62,7 @@ internal class Program
         Console.WriteLine("[| Vous êtes connecter ! |]");
         while (!end) 
         {
-            Console.WriteLine("- Que souhaitais vous faires ?");
+            Console.WriteLine("\n- Que souhaitais vous faires ?");
             Console.WriteLine("1) Lister les clients");
             Console.WriteLine("2) Lister les comptes");
             Console.WriteLine("3) Lister les operations");
@@ -72,19 +77,52 @@ internal class Program
             switch (key.Key)
             {
                 case ConsoleKey.NumPad1:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    clientRepository.getClients().ForEach(c => Console.WriteLine(c.toString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad2:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    compteBancaireRepository.GetCompteBancaires().ForEach(c => Console.WriteLine(c.ToString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad3:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    enregistrementRepository.GetEnregistrements().ForEach(e => Console.WriteLine(e.ToString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad4:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    Int32.TryParse(Console.ReadLine(), out int idOpt4);
+                    enregistrementRepository.GetEnregistrementsOfClient(idOpt4).ForEach(e => Console.WriteLine(e.ToString()));
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad5:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    Int32.TryParse(Console.ReadLine(), out int idOpt5);
+                    Console.WriteLine("Client : ");
+                    Client? client = clientRepository.getClient(idOpt5);
+                    if (client != null) 
+                    {
+                        Console.WriteLine(client.toString());
+                        Console.WriteLine("Compte :");
+                        Console.WriteLine(compteBancaireRepository.GetCompteBancaire(client.IdCompte).ToString());
+                        Console.WriteLine("Carte bancaire : ");
+                        carteBancaireRepository.GetCarteBancaireOfCompte(client.IdCompte).ForEach(c => Console.WriteLine(c.ToString()));
+                        Console.WriteLine("Opération : ");
+                        enregistrementRepository.GetEnregistrementsOfClient(idOpt5).ForEach(e => Console.WriteLine(e.ToString()));
+                    }
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.NumPad6:
                     Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
@@ -96,7 +134,81 @@ internal class Program
                     Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
                     break;
                 case ConsoleKey.NumPad9:
-                    Console.WriteLine("\nCette foncionnalité n'a pas encore été implémenter désolé");
+                    Console.WriteLine("\n[|-----------------------------------------|]");
+                    int id = enregistrementRepository.GetNewMaxId();
+                    Console.WriteLine("Sur quelle numero de carte voulez vous effectuez l'operation ?");
+                    string NumCarte = Console.ReadLine();
+                    Console.WriteLine("Quel est le montant de l'operation ? ");
+                    double Montant = Double.Parse(Console.ReadLine());
+                    Console.WriteLine("Quel type d'operation voulez vous effectuez ? ");
+                    Console.WriteLine("1) Depot");
+                    Console.WriteLine("2) Retrait");
+                    Console.WriteLine("3) Facture Carte bancaire");
+                    key = Console.ReadKey();
+                    bool typeError = false;
+                    TypeOperation type = TypeOperation.Depot;
+                    switch (key.Key) 
+                    {
+                        case ConsoleKey.NumPad1:
+                            type = TypeOperation.Depot;
+                            break;
+                        case ConsoleKey.NumPad2:
+                            type = TypeOperation.Retrait; 
+                            break;
+                        case ConsoleKey.NumPad3:
+                            type = TypeOperation.Facture; 
+                            break;
+                        default : 
+                            typeError = true;
+                            Console.WriteLine("Cette option n'existe pas, abandon de l'ajout"); 
+                            break;
+                    }
+
+                    if (!typeError) 
+                    {
+                        int idCB = carteBancaireRepository.GetIdCarteBancaireByNumCarte(NumCarte);
+                        if (idCB == -1)
+                            Console.WriteLine("Carte bancaire introuvable ");
+                        else 
+                        {
+                            bool opRealisable = true;
+                            if (type.Equals(TypeOperation.Retrait) || type.Equals(TypeOperation.Facture))
+                            {
+                                opRealisable = compteBancaireRepository.CheckNegativeOperation(idCB,Montant);
+                            }
+
+                            if (opRealisable)
+                            {
+                                CompteBancaire comp = compteBancaireRepository.GetCompteBancaireByIdCarte(idCB);
+                                if (type.Equals(TypeOperation.Retrait) || type.Equals(TypeOperation.Facture))
+                                {
+                                    comp.Solde = comp.Solde - Montant;
+                                }
+                                else 
+                                {
+                                    comp.Solde = comp.Solde + Montant;
+                                }
+                                compteBancaireRepository.UpdateSoldeCompteBancaire(comp);
+                                Enregistrement enr = new Enregistrement(id, NumCarte, Montant, type, DateTime.Now, idCB);
+                                bool result = enregistrementRepository.InsertEnregistrement(enr);
+                                if (result)
+                                {
+                                    Console.WriteLine("La nouvelle operation a bien été ajouter");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Impossible d'ajouter la nouvelle operation");
+                                }
+                            }
+                            else 
+                            {
+                                Console.WriteLine("L'operation n'est pas realisable car le solde est trop bas");
+                            }
+                        }
+                    }
+                    Console.WriteLine("[|-----------------------------------------|]");
+                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
+                    Console.ReadKey();
                     break;
                 case ConsoleKey.Q:
                     Console.WriteLine("\nAu revoir !");
@@ -108,48 +220,5 @@ internal class Program
             }
         }
 
-    }
-
-    private static void EnregistrementTests() 
-    {
-        EnregistrementRepository enregistrementRepository = new EnregistrementRepository();
-        //enregistrementRepository.InsertEnregistrement(new Enregistrement(3, "4974018502230236", 28.5, TypeOperation.Depot, DateTime.Now, 3));
-        enregistrementRepository.GetEnregistrements().ForEach(e => Console.WriteLine($"{e.NumCarte} {e.Id} {e.Type} {e.Montant} {e.Date:dd/MM/yyyy}"));
-    }
-
-    private static void ClientTests() 
-    {
-        try
-        {
-            ClientRepository clientRepo = new ClientRepository();
-            List<Client> clients = clientRepo.getClients();
-            clients.ForEach(client => Console.WriteLine(client.toString()));
-            //clientRepo.InsertClient(new ClientPart(3, "BETY", new Adresse("12, rue des Oliviers", "", "94000", "CRETEIL"), "bety@gmail.com", 2, new DateTime(1985, 11, 12), "Daniel", Sexe.Homme));
-            clientRepo.InsertClient(new ClientPro(4, "AXA", new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS"), "info@axa.fr", 1 , 2, "12548795641120", StatutJuridique.SARL, new Adresse("125 rue lafayette", "Digicode 1432", "94120", "FONTENAY SOUS BOIS")));
-            Console.WriteLine("----------------------------------------");
-            clients = clientRepo.getClients();
-            clients.ForEach(client => Console.WriteLine(client.toString()));
-
-        }
-        catch (ClientException e)
-        {
-            Console.WriteLine($"Une erreur a été détecter : Code - {e.Code} {e.Mes}");
-        }
-    }
-
-    private static void CompteBancaireTests()
-    {
-        CompteBancaireRepository cbr = new CompteBancaireRepository();
-        List<CompteBancaireModel> cbmList = cbr.GetCompteBancaires();
-        foreach (var c in cbmList)
-        {
-            Console.WriteLine($"{c.NumCompte} ouvert au {c.DateOuverture}. Solde :\t{c.Solde}");
-        }
-
-        CompteBancaireModel cbm = cbr.GetCompteBancaire(1);
-        Console.WriteLine($"{cbm.NumCompte} ouvert au {cbm.DateOuverture}. Solde :\t{cbm.Solde}");
-
-        CompteBancaire cb= new CompteBancaire();
-        cbr.InsertCompteBancaire(cb);
     }
 }

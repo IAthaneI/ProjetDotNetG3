@@ -24,5 +24,10 @@ namespace BankLib.Models
         public double Solde { get; set; } = 1000;
 
         public List<CarteBancaireModel>? CarteBancaireList { get; set; }
+
+        public override string ToString()
+        {
+            return $"Compte {Id} : {NumCompte} {DateOuverture:dd/MM/yyyy} {Solde:00000.00} ";
+        }
     }
 }

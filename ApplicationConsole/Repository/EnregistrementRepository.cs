@@ -50,6 +50,43 @@ namespace ApplicationConsole.Repository
         }
 
         /// <summary>
+        /// Renvoie la liste de tout les operations d'un client passe en parametre
+        /// </summary>
+        /// <param name="idClient"></param>
+        /// <returns>
+        /// La liste des enregistrements 
+        /// </returns>
+        public List<Enregistrement> GetEnregistrementsOfClient(int? idClient)
+        {
+            
+            List<Enregistrement> result = new List<Enregistrement>();
+            if (idClient == null) return result;
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = "SELECT e.Id as Id, e.NumCarte as NumCarte, e.Montant as Montant, e.Type as Type, e.DateOp as DateOp, e.IdCarteBancaire as IdCB " +
+                    "FROM Enregistrement e JOIN CarteBancaire ca ON e.IdCarteBancaire = ca.Id " +
+                    "JOIN CompteBancaire co ON ca.CompteBancaireId = co.Id " +
+                    "JOIN Clients ON Clients.IdCompte = co.Id " +
+                    "WHERE Clients.Identifiant = @IdClient";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+                DBUtilities.AddParameter(command, "IdClient", idClient, "Id");
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Enum.TryParse(reader.GetString(3), out TypeOperation op);
+                    result.Add(new Enregistrement(reader.GetInt32(0), reader.GetString(1), Double.Parse(reader.GetDecimal(2).ToString()), op, reader.GetDateTime(4), reader.GetInt32(5)));
+                }
+                connection.Close();
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Recupere un enregistrement celon l'ID précisé
         /// </summary>
         /// <param name="id"></param>
@@ -79,6 +116,29 @@ namespace ApplicationConsole.Repository
                 connection.Close();
             }
             return result;
+        }
+
+        public int GetNewMaxId()
+        {
+            int id = -1;
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = "SELECT MAX(Id) as idMax FROM Enregistrement ";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                }
+                
+                connection.Close();
+            }
+            return ++id;
         }
 
         /// <summary>

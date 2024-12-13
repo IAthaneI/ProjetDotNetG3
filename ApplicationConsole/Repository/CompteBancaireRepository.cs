@@ -168,7 +168,7 @@ namespace ApplicationConsole.Repository
         /// <returns>
         /// true si on peut retirer le montant, false si le solde est trop bas
         /// </returns>
-        public bool CheckNegativeOperation(int idCarteBancaire, int Montant)
+        public bool CheckNegativeOperation(int idCarteBancaire, Double Montant)
         {
             connection = DBUtilities.GetConnection();
             if (connection != null)
@@ -223,6 +223,32 @@ namespace ApplicationConsole.Repository
                 }
             }
             return res > 0;
+        }
+
+        public CompteBancaire GetCompteBancaireByIdCarte(int idCarte)
+        {
+            CompteBancaire comp = new CompteBancaire();
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = "SELECT co.Id, co.NumCompte, co.DateOuverture, co.Solde FROM CarteBancaire ca JOIN CompteBancaire co ON ca.CompteBancaireId = co.Id WHERE ca.Id = @Id";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+                DBUtilities.AddParameter(command, "Id", idCarte, "Id");
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    comp.Id = reader.GetInt32(0);
+                    comp.NumCompte = reader.GetString(1);
+                    comp.DateOuverture = reader.GetDateTime(2);
+                    comp.Solde = Double.Parse(reader.GetDecimal(3).ToString());
+                }
+                connection.Close();
+            }
+            return comp;
         }
 
         /// <summary>

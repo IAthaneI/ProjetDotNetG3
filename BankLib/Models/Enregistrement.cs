@@ -35,5 +35,10 @@ namespace BankLib.Models
             Date = date;
             CarteBancaireId = carteBancaireId;
         }
+
+        public override string ToString()
+        {
+            return $"Enregistrement {Id} : {NumCarte} {Date:dd/MM/yyyy} {Montant:00000.00} {Type} ";
+        }
     }
 }
