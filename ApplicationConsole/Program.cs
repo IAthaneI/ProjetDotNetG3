@@ -1,13 +1,7 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
-using Azure;
-using BankLib.Entities;
-using BankLib.Exceptions;
-using BankLib.Model;
 using BankLib.Models;
 using BankLib.Utilities;
-using System.Numerics;
-using System.Runtime.Serialization;
 
 internal class Program
 {
@@ -62,12 +56,12 @@ internal class Program
         }
         bool end = false;
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        ClientTests();
+        //ClientTests();
         //CompteBancaireTests();
-
+        OperationXmlTest(false);
     }
 
-    private static void ClientTests() 
+    private static void ClientTests()
     {
         try
         {
@@ -114,14 +108,11 @@ internal class Program
     private static void OperationXmlTest(bool run = true)
     {
         if(!run) return;
-        OperationModel op = new OperationModel();
-        op.Id = 1;
-        op.NumCarte = "4949494949494949";
-        op.Montant= 500;
-        op.Type = BankLib.Models.Type.Depot;
-        op.DateOp = DateTime.Today;
-        //op.IdCarteBancaire = 2;
-        ParserTool.OperationToXml(op);
+        OperationRepository opr = new OperationRepository();
+        DateTime debut = DateTime.Today.AddMonths(-3);
+        DateTime fin = DateTime.Today;
+        ParserTool.OperationToXml(opr.GetOperations(debut, fin));
+        ParserTool.OperationToXml(opr.GetOperations(debut, fin, "3T6DA3JHT5"));
     }
 
 

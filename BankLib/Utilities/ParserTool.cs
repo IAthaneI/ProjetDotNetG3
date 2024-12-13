@@ -18,23 +18,34 @@ namespace BankLib.Utilities
         /// <param name="operation"></param>
         /// <param name="mask"></param>
         /// fichier de sortie dans ApplicationConsole\bin\Debug\
-        public static void OperationToXml(OperationModel operation, bool mask = false)
+        public static void OperationToXml(List<OperationModel> operations, bool mask = false)
         {
-            string dateOnly = DateTime.Now.ToString("yyyy-MM-dd");
+            string dateOnly = DateTime.Today.ToString("yyyy-MM-dd");
             string xmlFilePath = $"operations-{dateOnly}.xml";
             string styleSheet = "operationStyleSheet.xsl";
             string htmlFilePath = $"operations-{dateOnly}.html";
 
 
+            #region Test
+            // fichier dans ConsoleAppTestApi\bin\Debug\
+            var test = Environment.CurrentDirectory;
+            Console.WriteLine(test);
+            //FileStream fileStream = File.Create("OpErAtIoNxxxxxxxxxxxxxxxxxxxxxxx.xml");
+            //FileStream fileStream = new FileStream("info.xml", FileMode.OpenOrCreate, FileAccess.Write);
+            //XmlSerializer xmlSerializer = new XmlSerializer(typeof(OperationModel));
+            //xmlSerializer.Serialize(fileStream, operations[0]);
+            #endregion
 
-            FileStream fileStream = File.Create(xmlFilePath);
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(OperationModel), "Operations");
-            xmlSerializer.Serialize(fileStream, operation);
+            //FileStream fileStream = File.Create(xmlFilePath);
+            FileStream fileStream = new FileStream(xmlFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<OperationModel>), "Operations");
+            xmlSerializer.Serialize(fileStream, operations);
             fileStream.Close();
 
-            XslCompiledTransform myXslTrans = new XslCompiledTransform();
-            myXslTrans.Load(styleSheet);
-            myXslTrans.Transform(xmlFilePath, htmlFilePath);
+            //XslCompiledTransform myXslTrans = new XslCompiledTransform();
+            //myXslTrans.Load(styleSheet);
+            //myXslTrans.Transform(xmlFilePath, htmlFilePath);
         }
         
     }

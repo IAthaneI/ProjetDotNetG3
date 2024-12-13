@@ -9,6 +9,7 @@ using ApplicationConsole.Utilities;
 using BankLib.Entities;
 using BankLib.Models;
 using BankLib;
+using BankLib.Utilities;
 
 namespace ApplicationConsole.Repository
 {
@@ -206,7 +207,7 @@ namespace ApplicationConsole.Repository
                 {
                     CarteBancaire carteBancaire = new CarteBancaire();
                     carteBancaire.Id = reader.GetInt32(0);
-                    carteBancaire.NumCarteSuffixe = Int32.Parse(reader.GetString(1));
+                    carteBancaire.NumCarte = Int32.Parse(reader.GetString(1));
                     carteBancaire.DateExpiration = new DateOnly(reader.GetDateTime(2).Year, reader.GetDateTime(2).Month, reader.GetDateTime(2).Day);
                     carteBancaire.NomTitulaire = reader.GetString(3);
                     result.Add(carteBancaire);

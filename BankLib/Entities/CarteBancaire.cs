@@ -10,7 +10,7 @@ namespace BankLib.Entities
     /// Entite Carte bancaire
     /// A utiliser dans les applications
     /// </summary>
-    [JsonSerializable(typeof(CarteBancaire))]
+    //[JsonSerializable(typeof(CarteBancaire))]
     public class CarteBancaire
     {
 
@@ -18,20 +18,6 @@ namespace BankLib.Entities
         [JsonPropertyName("id")]
         [XmlElement(Order = 1)]
         public int Id { get; set; }
-
-        [NotMapped]
-        [Range(0, 9999)]
-        public int NumCarteSuffixe
-        {
-            get => numCarteSuffixe;
-            set
-            {
-                if (value > 0) 
-                    numCarteSuffixe = value;
-                else 
-                    numCarteSuffixe = RandomTool.RandomInt(9999);
-            }
-        }
 
         [Required]
         [Range(0, Constantes.CARTE_BANCAIRE_NUM_MAX_VAL)]
