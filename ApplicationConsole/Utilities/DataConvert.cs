@@ -1,12 +1,5 @@
-﻿using BankLib.Entities;
-using BankLib.Model;
-using BankLib.Models;
-using System;
-using System.Collections.Generic;
+﻿using BankLib.Models;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationConsole.Utilities
 {
@@ -28,13 +21,37 @@ namespace ApplicationConsole.Utilities
             {
                 cbModel.Add(new CompteBancaireModel
                 {
-                    Id = (byte)row.Field<int>("Id"),
+                    Id = row.Field<int>("Id"),
                     NumCompte = row.Field<string>("NumCompte") ?? string.Empty,
                     DateOuverture = row.Field<DateTime>("DateOuverture"),
-                    Solde = (double)row.Field<decimal>("Solde"),
+                    Solde = (double)row.Field<decimal>("Solde")
+                });
+            }
+            return cbModel;
+        }
+
+        /// <summary>
+        /// Convertit la table CarteBancaire en liste de CarteBancaireModel
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <returns>Liste de compte bancaires</returns>
+        public static List<CarteBancaireModel> ToCarteBancaireModel(DataTable dataTable)
+        {
+            var cbModel = new List<CarteBancaireModel>();
+            if (dataTable == null || dataTable.Rows.Count == 0) return cbModel;
+            foreach (DataRow row in dataTable.AsEnumerable())
+            {
+                cbModel.Add(new CarteBancaireModel
+                {
+                    Id = row.Field<int>("Id"),
+                    NumCarte = row.Field<string>("NumCarte") ?? string.Empty,
+                    DateExpiration = row.Field<DateTime>("DateExpiration"),
+                    NomTitulaire = row.Field<string>("NomTitulaire") ?? string.Empty,
+                    CompteBancaireId = row.Field<int>("CompteBancaireId"),
                 });
             }
             return cbModel;
         }
     }
+
 }

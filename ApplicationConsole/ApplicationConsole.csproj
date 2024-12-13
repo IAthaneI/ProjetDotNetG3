@@ -20,7 +20,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BankLib\BankLib.csproj" />
+	  <Folder Include="Entities\" />
+	  <Folder Include="Model\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BankLib\BankLib.csproj" />
 	</ItemGroup>
 	
 </Project>

@@ -1,4 +1,5 @@
 ﻿using ApplicationConsole.Utilities;
+using BankLib;
 using BankLib.Entities;
 using BankLib.Models;
 using BankLib.Utilities;
@@ -28,6 +29,7 @@ namespace ApplicationConsole.Repository
             if (connection != null)
             {
                 DataTable table = new DataTable();
+                // TODO : préciser les champs au lieu de *
                 string query = "SELECT * FROM CompteBancaire";
                 try
                 {
@@ -154,7 +156,7 @@ namespace ApplicationConsole.Repository
         /// </summary>
         /// <param name="compteBancaire"></param>
         /// <returns>True si l'ajout s'est bien passé sinon False</returns>
-        public bool InsertCompteBancaire(CompteBancaire compteBancaire)
+        public bool InsertCompteBancaire(CompteBancaireModel compteBancaire)
         {
             int res = 0;
             if (connection != null)
@@ -290,11 +292,11 @@ namespace ApplicationConsole.Repository
         /// <returns></returns>
         private string SetUniqueNumCompte()
         {
-            string res = RandomTool.RandomString(10);
-            if (RandomTool.RetryUntilSuccessOrTimeout(() => GetCompteBancaire(res) == null, TimeSpan.FromSeconds(30)))
-            {
-                return res;
-            }
+            string res = RandomTool.RandomString(Constantes.COMPTE_BANCAIRE_NUM_LEN);
+            if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCompteBancaire(res) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
+                {
+                    return res;
+                }
             return string.Empty;
         }
     }
