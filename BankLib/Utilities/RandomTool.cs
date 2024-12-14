@@ -18,16 +18,16 @@
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
         /// <summary>
-        /// Permet de générer un nombre aléatoire entre 0 et "length"
+        /// Permet de générer un nombre aléatoire entre 0 et "max"
         /// </summary>
-        /// <param name="length">valeur max</param>
-        /// <returns>un nombre aléatoire entre 0 et length</returns>
-        public static int RandomInt(int length)
+        /// <param name="max">valeur max</param>
+        /// <returns>un nombre aléatoire entre 0 et max</returns>
+        public static int RandomInt(int max)
         {
-            return random.Next(0, length);
+            return random.Next(0, max);
         }
 
-       
     }
 }

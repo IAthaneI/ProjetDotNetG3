@@ -58,6 +58,7 @@ internal class Program
         Console.WriteLine("[| Vous êtes connecter ! |]");
         //ClientTests();
         //CompteBancaireTests();
+        CarteBancaireTests(false);
         OperationXmlTest(false);
     }
 
@@ -95,14 +96,16 @@ internal class Program
         Console.WriteLine("Insertion " + cbr.InsertCompteBancaire(new CompteBancaireModel()));
     }
 
-    private static void CarteBancaireTests()
+    private static void CarteBancaireTests(bool run = true)
     {
+        if (!run) return;
         CarteBancaireRepository cbr = new CarteBancaireRepository();
         List<CarteBancaireModel> cbmList = cbr.GetCarteBancaires();
         foreach (var c in cbmList)
         {
             Console.WriteLine($"Carte {c.NumCarte} pour le compte {c.CompteBancaireId} de {c.NomTitulaire}, expire au {c.DateExpiration}");
         }
+        cbr.InsertCarteBancaire(new CarteBancaireModel() { CompteBancaireId = 1, NomTitulaire = "Bill" });
     }
 
     private static void OperationXmlTest(bool run = true)

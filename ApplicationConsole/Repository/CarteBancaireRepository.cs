@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ApplicationConsole.Utilities;
 using BankLib.Entities;
 using BankLib.Models;
 using BankLib;
 using BankLib.Utilities;
+using System.Diagnostics;
 
 namespace ApplicationConsole.Repository
 {
@@ -93,13 +89,13 @@ namespace ApplicationConsole.Repository
         /// </summary>
         /// <param name="numCarte"></param>
         /// <returns></returns>
-        public CarteBancaireModel GetCarteBancaire(string numCarte)
+        public bool IsUniqueNumCarte(string numCarte)
         {
-            CarteBancaireModel cModel = new CarteBancaireModel();
+            bool res = false;
             if (connection != null)
             {
                 DataTable table = new DataTable();
-                string query = "SELECT * FROM CarteBancaire where NumCarte = @pNumCarte";
+                string query = "SELECT NumCarte FROM CarteBancaire where NumCarte = @pNumCarte";
                 try
                 {
                     connection.Open();
@@ -108,6 +104,7 @@ namespace ApplicationConsole.Repository
                     DBUtilities.AddParameter(command, "pNumCarte", numCarte, "NumCarte");
                     DbDataReader dbDataReader = command.ExecuteReader();
                     table.Load(dbDataReader);
+                    res = table.Rows.Count == 0;
                 }
                 catch (Exception ex)
                 {
@@ -117,9 +114,12 @@ namespace ApplicationConsole.Repository
                 {
                     connection.Close();
                 }
-                return DataConvert.ToCarteBancaireModel(table).FirstOrDefault();
             }
-            return cModel;
+            else
+            {
+                Console.WriteLine("Echec connection à la BDD !");
+            }
+            return res;
         }
 
         /// <summary>
@@ -133,9 +133,13 @@ namespace ApplicationConsole.Repository
             if (connection != null)
             {
                 if (carteBancaire == null)
+                {
                     Console.WriteLine("Valeurs incorrectes");
+                    return false;
+                }
                 else
-                    carteBancaire.NumCarte = SetUniqueNumCarte();
+                    carteBancaire.NumCarte = CreateUniqueNumCarte();
+
                 if (string.IsNullOrWhiteSpace(carteBancaire.NumCarte))
                 {
                     Console.WriteLine("Echec d'affectation de numéro de carte unique");
@@ -166,25 +170,50 @@ namespace ApplicationConsole.Repository
         }
 
         /// <summary>
-        /// Affecte un numéro de carte unique
-        /// La fonction GetCarteBancaire s'execute jusqu'au Timeout de 30 secondes au maximum
-        /// Elle s'arrete si elle retourne null => pas de correspondance
+        /// Génère un numéro de carte aléatoire dans un délai délimité,
+        /// qui respecte l'algorithme de Luhn, et qui n'existe pas encore en BDD
+        /// Si le délai est dépassé, retourne une chaine vide
         /// </summary>
-        /// <returns></returns>
-        private string SetUniqueNumCarte()
+        /// <returns>un numéro de carte unique</returns>
+        private string CreateUniqueNumCarte()
         {
-            int rand = RandomTool.RandomInt(Constantes.CARTE_BANCAIRE_NUM_MAX_VAL);
-            string numCarteLong = Constantes.CARTE_BANCAIRE_NUM_PREFIXE + rand;
-            if (ValidationTool.AlgoLuhn(numCarteLong))
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            //Tant que le temps de vérification n est pas écoulé
+            while (stopWatch.Elapsed.TotalSeconds < Constantes.RANDOM_WAIT_TIMEOUT)
             {
-                if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCarteBancaire(numCarteLong) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
+                // Genere un numCarte (les 4 derniers chiffres)
+                string numCarte = RandomTool.RandomInt(Constantes.CARTE_BANCAIRE_NUM_MAX_VAL).ToString("D4");
+
+                // Verifie que la carte au format long est valide selon l'algo de Luhn
+                if (ValidationTool.AlgoLuhn(Constantes.CARTE_BANCAIRE_NUM_PREFIXE + numCarte))
                 {
-                    return new string($"{rand:D4}");
+                    // Verifie s'il est unique en BDD
+                    if (IsUniqueNumCarte(numCarte))
+                    {
+                        return numCarte;
+                    }
                 }
             }
             return string.Empty;
         }
-      
+
+        public static bool RetryUntilSuccessOrTimeout(Func<bool> task, TimeSpan timeSpan)
+        {
+            bool success = false;
+            int elapsed = 0;
+            while ((!success) && (elapsed < timeSpan.TotalMilliseconds))
+            {
+                Thread.Sleep(1000);
+                elapsed += 1000;
+                success = task();
+            }
+            return success;
+        }
+
+
+
         public List<CarteBancaire> GetCarteBancaireOfCompte(int? idCompte)
         {
 
