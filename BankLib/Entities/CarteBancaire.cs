@@ -1,7 +1,6 @@
 ﻿using BankLib.Utilities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
@@ -11,7 +10,7 @@ namespace BankLib.Entities
     /// Entite Carte bancaire
     /// A utiliser dans les applications
     /// </summary>
-    [JsonSerializable(typeof(CarteBancaire))]
+    //[JsonSerializable(typeof(CarteBancaire))]
     public class CarteBancaire
     {
 

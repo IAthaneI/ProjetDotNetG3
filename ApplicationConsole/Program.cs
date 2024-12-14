@@ -1,10 +1,7 @@
-﻿using ApplicationConsole.Repository;
+using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
-using Azure;
-using BankLib.Entities;
-using BankLib.Exceptions;
-using BankLib.Model;
 using BankLib.Models;
+using BankLib.Utilities;
 using Microsoft.Identity.Client;
 using System.Numerics;
 using System.Runtime.Serialization;
@@ -62,7 +59,14 @@ internal class Program
         }
         bool end = false;
         Console.WriteLine("[| Vous êtes connecter ! |]");
-        while (!end) 
+        //ClientTests();
+        //CompteBancaireTests();
+        OperationXmlTest(false);
+    }
+
+    private static void ClientTests()
+    {
+        try
         {
             Console.WriteLine("\n- Que souhaitais vous faires ?");
             Console.WriteLine("1) Lister les clients");
@@ -288,64 +292,8 @@ internal class Program
                             Console.WriteLine("\nCette option n'existe pas, abandon de l'ajout"); 
                             break;
                     }
-
-                    if (!typeError) 
-                    {
-                        int idCB = carteBancaireRepository.GetIdCarteBancaireByNumCarte(NumCarte);
-                        if (idCB == -1)
-                            Console.WriteLine("\nCarte bancaire introuvable ");
-                        else 
-                        {
-                            bool opRealisable = true;
-                            if (type.Equals(TypeOperation.Retrait) || type.Equals(TypeOperation.Facture))
-                            {
-                                opRealisable = compteBancaireRepository.CheckNegativeOperation(idCB,Montant);
-                            }
-
-                            if (opRealisable)
-                            {
-                                CompteBancaire comp = compteBancaireRepository.GetCompteBancaireByIdCarte(idCB);
-                                if (type.Equals(TypeOperation.Retrait) || type.Equals(TypeOperation.Facture))
-                                {
-                                    comp.Solde = comp.Solde - Montant;
-                                }
-                                else 
-                                {
-                                    comp.Solde = comp.Solde + Montant;
-                                }
-                                compteBancaireRepository.UpdateSoldeCompteBancaire(comp);
-                                Enregistrement enr = new Enregistrement(id, NumCarte, Montant, type, DateTime.Now, idCB);
-                                bool result = enregistrementRepository.InsertEnregistrement(enr);
-                                if (result)
-                                {
-                                    Console.WriteLine("\nLa nouvelle operation a bien été ajouter");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nImpossible d'ajouter la nouvelle operation");
-                                }
-                            }
-                            else 
-                            {
-                                Console.WriteLine("\nL'operation n'est pas realisable car le solde est trop bas");
-                            }
-                        }
-                    }
-                    Console.WriteLine("[|-----------------------------------------|]");
-                    Console.WriteLine("Appuyer sur une touche pour continuer ... ");
-                    Console.ReadKey();
-                    break;
-                case ConsoleKey.Q:
-                    Console.WriteLine("\nAu revoir !");
-                    Console.WriteLine("[| Vous avez été déconnecté |]");
-                    end = true;
-                    break;
-                default:
-                    break;
-            }
-        }
     }
-
+          
     public static void GetClientInformation(Client c) 
     {
         ClientRepository clientRepository = new ClientRepository();
