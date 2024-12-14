@@ -16,6 +16,8 @@ namespace BankLib.Model
         private string? cp;
         private string? ville;
 
+        public Adresse() { }
+
         public Adresse(string? libelle, string? complement, string? cp, string? ville)
         {
             Libelle = libelle;

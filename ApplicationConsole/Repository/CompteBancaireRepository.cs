@@ -57,7 +57,7 @@ namespace ApplicationConsole.Repository
             String result  = "";
             if (connection != null)
             {
-                string query = "SELECT Nom FROM CompteBancaire JOIN Client ON CompteBancaire.Id = Client.IdCompte WHERE CompteBancaire.Id = @Id";
+                string query = "SELECT Nom FROM CompteBancaire JOIN Clients ON CompteBancaire.Id = Clients.IdCompte WHERE CompteBancaire.Id = @Id";
                 try
                 {
                     connection.Open();
