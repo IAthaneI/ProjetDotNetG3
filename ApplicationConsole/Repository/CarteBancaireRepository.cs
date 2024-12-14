@@ -173,14 +173,19 @@ namespace ApplicationConsole.Repository
         /// <returns></returns>
         private string SetUniqueNumCarte()
         {
-            int rand = RandomTool.RandomInt(Constantes.CARTE_BANCAIRE_NUM_MAX_VAL);
-            string numCarteLong = Constantes.CARTE_BANCAIRE_NUM_PREFIXE + rand;
-            if (ValidationTool.AlgoLuhn(numCarteLong))
+            bool isValid = false;
+            while (!isValid)
             {
-                if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCarteBancaire(numCarteLong) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
+                int rand = RandomTool.RandomInt(Constantes.CARTE_BANCAIRE_NUM_MAX_VAL);
+                string numCarteLong = Constantes.CARTE_BANCAIRE_NUM_PREFIXE + rand;
+                if (ValidationTool.AlgoLuhn(numCarteLong))
                 {
-                    return new string($"{rand:D4}");
-                }
+                    isValid = true;
+                    if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCarteBancaire(numCarteLong) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
+                    {
+                        return new string($"{rand:D4}");
+                    }
+                } 
             }
             return string.Empty;
         }

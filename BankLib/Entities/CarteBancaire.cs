@@ -42,7 +42,7 @@ namespace BankLib.Entities
 
         public override string ToString()
         {
-            return $"Carte Bancaire {Id} : {NumCarte} {DateExpiration:dd/MM/yyyy} {NomTitulaire}";
+            return $"Carte Bancaire {Id} : {NumCarteDisplay} {DateExpiration:dd/MM/yyyy} {NomTitulaire}";
         }
     }
 }

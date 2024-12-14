@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ApplicationConsole.Repository.CarteBancaireRepository">
+    <Position X="13.5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAACAAAABIAAAAAAAAAABAQQAAAAAACA=</HashCode>
+      <FileName>Repository\CarteBancaireRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationConsole.Repository.ClientRepository">
+    <Position X="9.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAQAAAAAAAAAABAAAAAAAAAAABAAAAAAAAAIA=</HashCode>
+      <FileName>Repository\ClientRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationConsole.Repository.CompteBancaireRepository">
+    <Position X="11" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAEAIAAAAAAAgBAAABAAAAAAAAAAAQAAAAAAQ=</HashCode>
+      <FileName>Repository\CompteBancaireRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationConsole.Repository.EnregistrementRepository">
+    <Position X="15.75" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQABAAAAAAAAAAAABAAAAAAAAQAABAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\EnregistrementRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationConsole.Utilities.Authent">
+    <Position X="4.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Utilities\Authent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationConsole.Utilities.DataConvert">
+    <Position X="19.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\DataConvert.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationConsole.Utilities.DBUtilities">
+    <Position X="18.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Utilities\DBUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BankLib.Entities.CarteBancaire">
+    <Position X="13.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Entities.CompteBancaire">
+    <Position X="11.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Exceptions.ClientException">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Model.Adresse">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Model.Client">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Adresse" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankLib.Model.ClientPart">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Sexe" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankLib.Model.ClientPro">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Siege" />
+      <Property Name="StatutJuridique" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankLib.Models.Enregistrement">
+    <Position X="15.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Type" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BankLib.Utilities.RandomTool">
+    <Position X="19.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Utilities.ValidationTool">
+    <Position X="19.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Constantes">
+    <Position X="18.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Model.Sexe">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Model.StatutJuridique">
+    <Position X="1" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BankLib.Models.TypeOperation">
+    <Position X="17.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Program">
+    <Position X="5.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
