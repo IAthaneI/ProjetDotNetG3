@@ -1,7 +1,5 @@
 ﻿using BankLib.Models;
-using System.Xml;
 using System.Xml.Serialization;
-using System.Xml.XPath;
 using System.Xml.Xsl;
 
 namespace BankLib.Utilities
@@ -11,41 +9,32 @@ namespace BankLib.Utilities
     /// </summary>
     public class ParserTool
     {
-        /*TODO : Relier avec xslt pour formatter*/
         /// <summary>
-        /// Opérations avec censures de données
+        /// Génération de fichier xml et html a partir des opérations
         /// </summary>
-        /// <param name="operation"></param>
-        /// <param name="mask"></param>
+        /// <param name="operation">List<OperationModel></param>
         /// fichier de sortie dans ApplicationConsole\bin\Debug\
-        public static void OperationToXml(List<OperationModel> operations, bool mask = false)
+        public static void OperationToXml(List<OperationModel> operations)
         {
             string dateOnly = DateTime.Today.ToString("yyyy-MM-dd");
             string xmlFilePath = $"operations-{dateOnly}.xml";
-            string styleSheet = "operationStyleSheet.xsl";
+            string styleSheetPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "operationStyleSheet.xml");
             string htmlFilePath = $"operations-{dateOnly}.html";
 
-
             #region Test
-            // fichier dans ConsoleAppTestApi\bin\Debug\
-            var test = Environment.CurrentDirectory;
-            Console.WriteLine(test);
-            //FileStream fileStream = File.Create("OpErAtIoNxxxxxxxxxxxxxxxxxxxxxxx.xml");
-            //FileStream fileStream = new FileStream("info.xml", FileMode.OpenOrCreate, FileAccess.Write);
-            //XmlSerializer xmlSerializer = new XmlSerializer(typeof(OperationModel));
-            //xmlSerializer.Serialize(fileStream, operations[0]);
+            //Console.WriteLine(styleSheet);
+            //Console.WriteLine(Environment.CurrentDirectory);
             #endregion
 
-            //FileStream fileStream = File.Create(xmlFilePath);
             FileStream fileStream = new FileStream(xmlFilePath, FileMode.OpenOrCreate, FileAccess.Write);
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<OperationModel>), "Operations");
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<OperationModel>));
             xmlSerializer.Serialize(fileStream, operations);
             fileStream.Close();
 
-            //XslCompiledTransform myXslTrans = new XslCompiledTransform();
-            //myXslTrans.Load(styleSheet);
-            //myXslTrans.Transform(xmlFilePath, htmlFilePath);
+            XslCompiledTransform myXslTrans = new XslCompiledTransform();
+            myXslTrans.Load(styleSheetPath);
+            myXslTrans.Transform(xmlFilePath, htmlFilePath);
         }
         
     }
