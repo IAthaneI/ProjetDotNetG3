@@ -16,10 +16,11 @@ namespace BankLib.Utilities
         /// fichier de sortie dans ApplicationConsole\bin\Debug\
         public static void OperationToXml(List<OperationModel> operations)
         {
-            string dateOnly = DateTime.Today.ToString("yyyy-MM-dd");
-            string xmlFilePath = $"operations-{dateOnly}.xml";
+            Console.WriteLine(operations.Count);
+            string dateOnly = DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss");
+            string xmlFilePath = $".\\OPERATION\\operations-{dateOnly}.xml";
             string styleSheetPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "operationStyleSheet.xml");
-            string htmlFilePath = $"operations-{dateOnly}.html";
+            string htmlFilePath = $".\\OPERATION\\operations-{dateOnly}.html";
 
             #region Test
             //Console.WriteLine(styleSheet);

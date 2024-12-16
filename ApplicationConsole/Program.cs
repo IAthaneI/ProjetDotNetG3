@@ -1,5 +1,6 @@
 ﻿using ApplicationConsole.Repository;
 using ApplicationConsole.Utilities;
+using BankLib.Entities;
 using BankLib.Exceptions;
 using BankLib.Model;
 using BankLib.Models;
@@ -58,6 +59,7 @@ internal class Program
                     break;
             }
         }
+        OperationXmlTest();
         bool end = false;
         Console.WriteLine("[| Vous êtes connecter ! |]");
         while (!end) 
@@ -288,6 +290,40 @@ internal class Program
                                 Console.WriteLine("\nCette option n'existe pas, abandon de l'ajout");
                                 break;
                         }
+                        if (!typeError)
+                        {
+                            int idCb = carteBancaireRepository.GetIdCarteBancaireByNumCarte(NumCarte);
+                            CompteBancaire compteBancaire = compteBancaireRepository.GetCompteBancaireByIdCarte(idCb);
+                            Enregistrement enregistrement = new Enregistrement(id, NumCarte, Montant, type, DateTime.Now, idCb);
+                            bool canBeInsert = true;
+                            if (type == TypeOperation.Retrait || type == TypeOperation.Facture)
+                            {
+                                canBeInsert = compteBancaireRepository.CheckNegativeOperation(idCb, Montant);
+                                compteBancaire.Solde = compteBancaire.Solde - Montant;
+                            }
+                            else
+                            {
+                                compteBancaire.Solde = compteBancaire.Solde + Montant;
+                            }
+
+                            if (canBeInsert)
+                            {
+                                compteBancaireRepository.UpdateSoldeCompteBancaire(compteBancaire);
+                                bool isEnrInsert = enregistrementRepository.InsertEnregistrement(enregistrement);
+                                if (isEnrInsert)
+                                {
+                                    Console.WriteLine("\nL'operation a bien été enregistré");
+                                }
+                                else 
+                                {
+                                    Console.WriteLine("\nIl y a eu une erreur lors de l'enregistrement");                                
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"\nLe solde du compte {compteBancaire.NumCompte} est trop bas, opération impossible");
+                            } 
+                        }
                         break;
                     case ConsoleKey.Q:
                         Console.WriteLine("\n[|Vous avez été déconnécté.|]");
@@ -309,15 +345,17 @@ internal class Program
         }
     }
 
-    private static void ClientTests()
+    private static void OperationXmlTest(bool run = true)
     {
-        ClientRepository clientRepository = new ClientRepository();
-        EnregistrementRepository enregistrementRepository = new EnregistrementRepository();
-        CarteBancaireRepository carteBancaireRepository = new CarteBancaireRepository();
-        CompteBancaireRepository compteBancaireRepository = new CompteBancaireRepository();
-        
-        }
-
+        if (!run) return;
+        OperationRepository opr = new OperationRepository();
+        DateTime debut = DateTime.Today.AddMonths(-3);
+        DateTime fin = DateTime.Today;
+        ParserTool.OperationToXml(opr.GetOperations(debut, fin));
+        Console.WriteLine("Veuillez appuyez sur une touche....");
+        Console.ReadKey();
+        ParserTool.OperationToXml(opr.GetOperations(debut, fin, "9998887410"));
+    }
 
     public static void GetClientInformation(Client c)
     {
