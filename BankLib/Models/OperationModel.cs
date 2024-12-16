@@ -8,7 +8,6 @@ namespace BankLib.Models
     [Serializable]
     public class OperationModel
     {
-        [XmlAttribute("numCompte")]
         public string NumCompte { get; set; }
 
         [XmlElement(ElementName = "nomTitulaire")]

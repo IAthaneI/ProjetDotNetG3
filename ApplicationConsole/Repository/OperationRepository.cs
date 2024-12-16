@@ -42,13 +42,13 @@ namespace ApplicationConsole.Repository
                     "LEFT JOIN dbo.CarteBancaire cb ON cpt.Id = cb.Id " +
                     "JOIN dbo.Enregistrement enr ON enr.IdCarteBancaire = cb.Id " +
                     "WHERE enr.DateOp BETWEEN @pDateDebut AND @pDateFin " +
-                    "ORDER BY cpt.NumCompte, enr.DateOp";
+                    "ORDER BY cpt.NumCompte, cb.NumCarte, enr.DateOp";
                 string query2 = "SELECT cpt.NumCompte, cb.NumCarte, cb.NomTitulaire, cpt.DateOuverture, cpt.Solde, cb.DateExpiration, enr.Montant, enr.Type, enr.DateOp " +
                     "FROM dbo.CompteBancaire cpt " +
                     "LEFT JOIN dbo.CarteBancaire cb ON cpt.Id = cb.Id " +
                     "JOIN dbo.Enregistrement enr ON enr.IdCarteBancaire = cb.Id " +
                     "WHERE enr.DateOp BETWEEN @pDateDebut AND @pDateFin AND cpt.NumCompte = @pNumCompte " +
-                    "ORDER BY enr.DateOp";
+                    "ORDER BY cb.NumCarte, enr.DateOp";
                 try
                 {
                     connection.Open();

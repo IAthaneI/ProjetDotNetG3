@@ -5,6 +5,7 @@ using BankLib.Models;
 using BankLib.Utilities;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 
 namespace ApplicationConsole.Repository
 {
@@ -165,11 +166,16 @@ namespace ApplicationConsole.Repository
                     Console.WriteLine("Valeurs incorrectes");
                 else
                     compteBancaire.NumCompte = SetUniqueNumCompte();
-                if(string.IsNullOrWhiteSpace(compteBancaire.NumCompte))
+                if (string.IsNullOrWhiteSpace(compteBancaire.NumCompte))
                 {
                     Console.WriteLine("Echec d'affectation de numéro de compte unique");
                     return false;
-                }    
+                }
+                if(compteBancaire.NumCompte.Length != Constantes.COMPTE_BANCAIRE_NUM_LEN)
+                {
+                    Console.WriteLine("Numéro de compte bancaire invalide");
+                    return false;
+                }
                 string query = "INSERT INTO CompteBancaire Values (@pNumCompte, @pDateOuverture, @pSolde)";
                 try
                 {
@@ -286,18 +292,29 @@ namespace ApplicationConsole.Repository
 
         /// <summary>
         /// Affecte un numéro de compte unique
-        /// La fonction GetCompteBancaire s'execute jusqu'au Timeout de 30 secondes au maximum
-        /// Elle s'arrete si elle retourne null => pas de correspondance
+        /// Dans un temps limité, execute de facon cyclique :
+        ///  une génération de numéro de compte aléatoire
+        ///  vérifie en BDD s'il est unique
         /// </summary>
-        /// <returns></returns>
+        /// <returns>numCompte unique ou chaine vide</returns>
         private string SetUniqueNumCompte()
         {
-            string res = RandomTool.RandomString(Constantes.COMPTE_BANCAIRE_NUM_LEN);
-            if (ValidationTool.RetryUntilSuccessOrTimeout(() => GetCompteBancaire(res) == null, TimeSpan.FromSeconds(Constantes.RANDOM_WAIT_TIMEOUT)))
-                {
-                    return res;
-                }
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            //Tant que le temps de vérification n est pas écoulé
+            while (stopWatch.Elapsed.TotalSeconds < Constantes.RANDOM_WAIT_TIMEOUT)
+            {
+                // Genere un numCompte
+                string numCompte = RandomTool.RandomString(Constantes.COMPTE_BANCAIRE_NUM_LEN);
+                    // Verifie s'il est unique en BDD
+                    if (GetCompteBancaire(numCompte) == null)
+                    {
+                        return numCompte;
+                    }
+            }
             return string.Empty;
         }
+
     }
 }
