@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BankLib.Models
 {
@@ -20,6 +21,7 @@ namespace BankLib.Models
         [Required]
         public double Solde { get; set; } = Constantes.COMPTE_BANCAIRE_SOLDE_INITIAL;
 
+        [NotMapped]
         public List<CarteBancaireModel>? CarteBancaireList { get; set; }
 
         public override string ToString()

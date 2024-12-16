@@ -52,6 +52,43 @@ namespace ApplicationConsole.Utilities
             }
             return cbModel;
         }
+
+        public static List<OperationModel> ToOperationModel(DataTable dataTable)
+        {
+            var op = new List<OperationModel>();
+            if (dataTable == null || dataTable.Rows.Count == 0) return op;
+            foreach (DataRow row in dataTable.AsEnumerable())
+            {
+                op.Add(new OperationModel
+                {
+                    NumCompte = row.Field<string>("NumCompte") ?? string.Empty,
+                    NumCarte = row.Field<string>("NumCarte") ?? string.Empty,
+                    NomTitulaire = row.Field<string>("NomTitulaire") ?? string.Empty,
+                    DateOuverture = row.Field<DateTime>("DateOuverture"),
+                    Solde = (double)row.Field<decimal>("Solde"),
+                    DateExpiration = row.Field<DateTime>("DateExpiration"),
+                    Montant = (double)row.Field<decimal>("Montant"),
+                    TypeOperation = ToTypeOperation(row.Field<string>("Type")),
+                    DateOp = row.Field<DateTime>("DateOp"),
+                });
+            }
+            return op;
+        }
+
+
+        public static TypeOperation ToTypeOperation(string sType)
+        {
+            try
+            {
+                Enum.TryParse(sType, out TypeOperation type);
+                return type;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Type operation invalide. Valeur attribuée : facture\n" + ex.Message);
+                return TypeOperation.Facture;
+            }
+        }
     }
 
 }

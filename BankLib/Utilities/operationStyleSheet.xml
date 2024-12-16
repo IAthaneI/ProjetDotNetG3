@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+  <html>
+  <body>
+  <h2>Opérations</h2>
+  <table border="1">
+    <tr bgcolor="#2596be">
+      <th>Compte</th>
+      <th>Titulaire</th>
+      <th>Date ouverture</th>
+      <th>Solde</th>
+      <th>Carte</th>
+      <th>Date expiration</th>
+      <th>Date opération</th>
+      <th>Type opération</th>
+      <th>Montant</th>
+    </tr>
+    <xsl:for-each select="ArrayOfOperationModel/OperationModel">
+    <tr>
+      <td><xsl:value-of select="NumCompte"/></td>
+      <td><xsl:value-of select="nomTitulaire"/></td>
+	  <td><xsl:value-of select="dateOuvertureCompte" /></td>
+      <td><xsl:value-of select="soldeCompte"/> €</td>
+      <td><xsl:value-of select="numeroCarte"/></td>
+      <td><xsl:value-of select="dateExpirationCarte"/></td>
+      <td><xsl:value-of select="dateOperation"/></td>
+      <td><xsl:value-of select="typeOperation"/></td>
+      <td><xsl:value-of select="montantOperation"/> €</td>
+    </tr>
+    </xsl:for-each>
+  </table>
+  </body>
+  </html>
+</xsl:template>
+
+</xsl:stylesheet>

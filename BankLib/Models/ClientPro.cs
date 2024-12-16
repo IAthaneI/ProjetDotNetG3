@@ -16,8 +16,9 @@ namespace BankLib.Model
         private int ident;
         private string? siret;
         private StatutJuridique statutJuridique;
-        private Adresse siege;
+        private Adresse? siege;
 
+        public ClientPro() { }
         public ClientPro(int identifiant, string? nom, Adresse? adresse, string? mail, int idCompte,int ident, string? siret, StatutJuridique statutJuridique, Adresse siege) 
             : base(identifiant, nom, adresse, mail, idCompte)
         {

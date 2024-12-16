@@ -1,10 +1,34 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\",
   "Documents": [
     {
       "AbsoluteMoniker": "D:0:0:{CE663267-75EA-46A6-A640-155D1EAB6F21}|Serveur\\Serveur.csproj|c:\\users\\hadda\\source\\repos\\projetdotnetg3\\serveur\\controllers\\enregistrementscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE663267-75EA-46A6-A640-155D1EAB6F21}|Serveur\\Serveur.csproj|solutionrelative:serveur\\controllers\\enregistrementscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+  "WorkspaceRootPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\applicationconsole\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|solutionrelative:applicationconsole\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\banklib\\utilities\\parsertool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|solutionrelative:banklib\\utilities\\parsertool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\applicationconsole\\repository\\operationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|solutionrelative:applicationconsole\\repository\\operationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\banklib\\models\\operationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C60C9B3-18E6-448A-91DA-88CFECA43C76}|BankLib\\BankLib.csproj|solutionrelative:banklib\\models\\operationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|d:\\dev\\csharp\\ajc\\projets\\ajcbank\\applicationconsole\\utilities\\dataconvert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF595FC6-6934-46C5-BE79-B4DF33051721}|ApplicationConsole\\ApplicationConsole.csproj|solutionrelative:applicationconsole\\utilities\\dataconvert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> a7c93e0d577d251be4e094987cf77af4c51eedf4
     }
   ],
   "DocumentGroupContainers": [
@@ -13,6 +37,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< HEAD
           "DockedWidth": 213,
           "SelectedChildIndex": 1,
           "Children": [
@@ -31,6 +56,120 @@
               "ViewState": "AgIAACABAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-15T16:49:33.179Z",
+=======
+          "DockedWidth": 275,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 259,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OperationModel.cs",
+              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Models\\OperationModel.cs",
+              "RelativeDocumentMoniker": "BankLib\\Models\\OperationModel.cs",
+              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Models\\OperationModel.cs",
+              "RelativeToolTip": "BankLib\\Models\\OperationModel.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAqwBcAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T15:35:45.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Program.cs",
+              "RelativeDocumentMoniker": "ApplicationConsole\\Program.cs",
+              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Program.cs",
+              "RelativeToolTip": "ApplicationConsole\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T14:47:16.773Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DataConvert.cs",
+              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Utilities\\DataConvert.cs",
+              "RelativeDocumentMoniker": "ApplicationConsole\\Utilities\\DataConvert.cs",
+              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Utilities\\DataConvert.cs",
+              "RelativeToolTip": "ApplicationConsole\\Utilities\\DataConvert.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T10:24:58.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ParserTool.cs",
+              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Utilities\\ParserTool.cs",
+              "RelativeDocumentMoniker": "BankLib\\Utilities\\ParserTool.cs",
+              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\Utilities\\ParserTool.cs",
+              "RelativeToolTip": "BankLib\\Utilities\\ParserTool.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAqwCsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-12T11:43:20.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OperationRepository.cs",
+              "DocumentMoniker": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Repository\\OperationRepository.cs",
+              "RelativeDocumentMoniker": "ApplicationConsole\\Repository\\OperationRepository.cs",
+              "ToolTip": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\Repository\\OperationRepository.cs",
+              "RelativeToolTip": "ApplicationConsole\\Repository\\OperationRepository.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAADwv0UAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T08:30:27.937Z",
+>>>>>>> a7c93e0d577d251be4e094987cf77af4c51eedf4
               "EditorCaption": ""
             }
           ]

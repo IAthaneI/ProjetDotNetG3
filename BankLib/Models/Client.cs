@@ -19,6 +19,7 @@ namespace BankLib.Model
         private string? mail;
         private int idCompte;
 
+        protected Client() { }  
         protected Client(int identifiant, string? nom, Adresse? adresse, string? mail, int idCompte)
         {
             Identifiant = identifiant;

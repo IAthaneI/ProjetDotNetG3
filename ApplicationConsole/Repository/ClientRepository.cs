@@ -198,6 +198,28 @@ namespace ApplicationConsole.Repository
 
         }
 
+        public int GetNewMaxId(String champID, String table)
+        {
+            int id = -1;
+            connection = DBUtilities.GetConnection();
+            if (connection != null)
+            {
+                connection.Open();
+                string query = $"SELECT MAX({champID}) as idMax FROM {table} ";
+                DbCommand command = connection.CreateCommand();
+                command.CommandText = query;
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                }
+
+                connection.Close();
+            }
+            return ++id;
+        }
 
     }
 }
