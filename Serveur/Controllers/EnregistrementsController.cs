@@ -51,6 +51,20 @@ namespace Serveur.Controllers
             return enregistrement;
         }
 
+        // GET: api/Enregistrements/numCarte
+        [HttpGet("numCarte/{numCarte}")]
+        public async Task<ActionResult<Enregistrement>> GetEnregistrementByNumCard(string numCarte)
+        {
+            var enregistrement = await _context.Enregistrements.FirstOrDefaultAsync(e =>  e.NumCarte == numCarte);
+
+            if (enregistrement == null)
+            {
+                return NotFound();
+            }
+
+            return enregistrement;
+        }
+
         // PUT: api/Enregistrements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -146,7 +160,6 @@ namespace Serveur.Controllers
                     });
                     continue;
                 }
-
                 // Créer une opération à partir des données du fichier
                 var enregistrement = new Enregistrement
                 {
@@ -156,7 +169,6 @@ namespace Serveur.Controllers
                     DateOperation = DateTime.Parse(fields[3]),
                     Devise = fields[4]
                 };
-
                 // Vérification du numéro de carte avec l'algorithme de Luhn
                 if (!ValiderCB.AlgoLuhn(enregistrement.NumCarte))
                 {
@@ -171,7 +183,6 @@ namespace Serveur.Controllers
                     enregistrements.Add(enregistrement);
                 }
             }
-
             // Sauvegarder les données dans la base
             try
             {
@@ -184,8 +195,6 @@ namespace Serveur.Controllers
             {
                 return BadRequest(new { Error = ex.Message });
             }
-
-
             return Ok(new { Processed = enregistrements.Count, Anomalies = anomalies.Count });
         }
 
@@ -223,50 +232,6 @@ namespace Serveur.Controllers
         }
 
 
-        /// <summary>
-        /// Génère un fichier JSON quotidien contenant les opérations validées.
-        /// </summary>
-        /*[HttpGet("daily-report")]
-        public async Task<IActionResult> GenerateDailyReport()
-        {
-            // Récupérer les opérations valides depuis la base de données
-            var enregistrements = await _context.Enregistrements.Where(o => o.EstValide).ToListAsync();
-
-            var report = new List<object>();
-
-            foreach (var enregistrement in enregistrements)
-            {
-                decimal? exchangeRate = null;
-
-                // Ajouter le taux de change si la devise n'est pas EUR
-                if (enregistrement.Devise != "EUR")
-                {
-                    exchangeRate = await _exchangeRateService.GetExchangeRateAsync(enregistrement.Devise, "EUR");
-                }
-
-                report.Add(new
-                {
-                    operation.CardNumber,
-                    operation.Amount,
-                    OperationType = operation.OperationType.ToString(), // Convert enum to string
-                    operation.Date,
-                    operation.Currency,
-                    ExchangeRate = exchangeRate
-                });
-            }
-
-            // Générer le fichier JSON
-            var jsonReport = JsonConvert.SerializeObject(report, Formatting.Indented);
-            var fileName = $"DailyReport_{DateTime.Now:yyyyMMdd}.json";
-
-            // Retourner le fichier JSON
-            return File(Encoding.UTF8.GetBytes(jsonReport), "application/json", fileName);
-        }*/
-
-
-
-
-
 
         /// <summary>
         /// Crée un fichier CSV avec des enregistrements d'opérations.
@@ -277,9 +242,9 @@ namespace Serveur.Controllers
             // Exemple de données d'opérations (générées manuellement ici)
             var enregistrements = new List<Enregistrement>
         {
-            new Enregistrement() { Montant = 100.00m, TypeOperation = TypeOperation.Retrait, DateOperation = DateTime.Now, Devise = "EUR", EstValide = true },
-            new Enregistrement() { Montant = 250.00m, TypeOperation = TypeOperation.FactureCarteBleue, DateOperation = DateTime.Now, Devise = "USD", EstValide = true },
-            new Enregistrement() { Montant = 150.00m, TypeOperation = TypeOperation.DepotGuichet, DateOperation = DateTime.Now, Devise = "EUR", EstValide = true }
+            new Enregistrement() { Montant = 200.00m, TypeOperation = TypeOperation.Retrait, DateOperation = DateTime.Now, Devise = "GBP"},
+            new Enregistrement() { Montant = 10.00m, TypeOperation = TypeOperation.FactureCarteBleue, DateOperation = DateTime.Now, Devise = "USD"},
+            new Enregistrement() { Montant = 1500.00m, TypeOperation = TypeOperation.DepotGuichet, DateOperation = DateTime.Now, Devise = "JPY" }
         };
 
             // Obtenir le chemin du fichier à générer

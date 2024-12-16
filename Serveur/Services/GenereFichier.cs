@@ -11,11 +11,11 @@
         {
             using (var writer = new StreamWriter(filePath))
             {
-                writer.WriteLine("NumCarte,Montant,TypeOperation,DateOperation,Devise");
+                //writer.WriteLine("NumCarte,Montant,TypeOperation,DateOperation,Devise");
 
                 foreach (var enregistrement in enregistrements)
                 {
-                    writer.WriteLine($"{enregistrement.NumCarte},{enregistrement.Montant},{enregistrement.TypeOperation},{enregistrement.DateOperation},{enregistrement.Devise}");
+                    writer.WriteLine($"{enregistrement.NumCarte};{enregistrement.Montant};{enregistrement.TypeOperation};{enregistrement.DateOperation};{enregistrement.Devise}");
                 }
             }
         }

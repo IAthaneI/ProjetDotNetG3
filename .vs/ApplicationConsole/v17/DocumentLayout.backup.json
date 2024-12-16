@@ -1,7 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CE663267-75EA-46A6-A640-155D1EAB6F21}|Serveur\\Serveur.csproj|c:\\users\\hadda\\source\\repos\\projetdotnetg3\\serveur\\controllers\\enregistrementscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE663267-75EA-46A6-A640-155D1EAB6F21}|Serveur\\Serveur.csproj|solutionrelative:serveur\\controllers\\enregistrementscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 213,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EnregistrementsController.cs",
+              "DocumentMoniker": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\Serveur\\Controllers\\EnregistrementsController.cs",
+              "RelativeDocumentMoniker": "Serveur\\Controllers\\EnregistrementsController.cs",
+              "ToolTip": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\Serveur\\Controllers\\EnregistrementsController.cs",
+              "RelativeToolTip": "Serveur\\Controllers\\EnregistrementsController.cs",
+              "ViewState": "AgIAACABAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-15T16:49:33.179Z",
+              "EditorCaption": ""
             }
           ]
         }

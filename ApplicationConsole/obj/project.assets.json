@@ -4507,23 +4507,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rin\\.nuget\\packages\\": {},
+    "C:\\Users\\Hadda\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\ApplicationConsole.csproj",
+      "projectUniqueName": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\ApplicationConsole\\ApplicationConsole.csproj",
       "projectName": "ApplicationConsole",
-      "projectPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\ApplicationConsole.csproj",
-      "packagesPath": "C:\\Users\\Rin\\.nuget\\packages\\",
-      "outputPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\obj\\",
+      "projectPath": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\ApplicationConsole\\ApplicationConsole.csproj",
+      "packagesPath": "C:\\Users\\Hadda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hadda\\Source\\Repos\\ProjetDotNetG3\\ApplicationConsole\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Rin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hadda\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4539,8 +4539,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\BankLib.csproj": {
-              "projectPath": "D:\\dev\\csharp\\ajc\\projets\\ajcBank\\BankLib\\BankLib.csproj"
+            "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\BankLib\\BankLib.csproj": {
+              "projectPath": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\BankLib\\BankLib.csproj"
             }
           }
         }
@@ -4607,13 +4607,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problème de lecture du fichier cache D:\\dev\\csharp\\ajc\\projets\\ajcBank\\ApplicationConsole\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

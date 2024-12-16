@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qQKWXZa+FBk=",
+  "dgSpecHash": "ad5qWoX1/94=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hadda\\Source\\Repos\\ProjetDotNetG3\\Serveur\\Serveur.csproj",
+  "projectFilePath": "C:\\Users\\Hadda\\source\\repos\\ProjetDotNetG3\\Serveur\\Serveur.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hadda\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Hadda\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

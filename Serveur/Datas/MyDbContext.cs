@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Serveur.Entities;
 namespace Serveur.Datas
 {
@@ -15,11 +16,16 @@ namespace Serveur.Datas
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configuration des tables pour TPT
+            
             modelBuilder.Entity<Enregistrement>().ToTable("Enregistrements");
             modelBuilder.Entity<Anomalie>().ToTable("Anomalies");
 
-            // Configuration des propriétés communes : `CardNumber` et `Date` seront présentes dans les deux tables
+            
         }
+
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=dbCB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        }*/
     }
 }
